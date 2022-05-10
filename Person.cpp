@@ -2,7 +2,7 @@
 #include "Person.h"
 using namespace std;
 
-//функция увелечения маны после удара
+//С„СѓРЅРєС†РёСЏ СѓРІРµР»РµС‡РµРЅРёСЏ РјР°РЅС‹ РїРѕСЃР»Рµ СѓРґР°СЂР°
 void Person::rise_mana(Person enemy) {
 	if (enemy._hp <= 0) {
 		_mana += 0.5 * _dmg;
@@ -12,18 +12,18 @@ void Person::rise_mana(Person enemy) {
 	}
 }
 
-//функция удара
+//С„СѓРЅРєС†РёСЏ СѓРґР°СЂР°
 void Person::deal_dmg(Person& enemy, int dmg) {
 	if (enemy._armor == 1)
 		_armor = 0;
 	else
 		enemy._hp -= dmg;
 	if (enemy._hp <= 0)
-		cout << "умер" << "\n";
+		cout << "СѓРјРµСЂ" << "\n";
 	rise_mana(enemy);
 }
 
-//функция нанесения урона ядом
+//С„СѓРЅРєС†РёСЏ РЅР°РЅРµСЃРµРЅРёСЏ СѓСЂРѕРЅР° СЏРґРѕРј
 void Person::rec_poison_dmg() {
 	if (_time_poison != 0) {
 		_hp -= 5;
@@ -31,7 +31,7 @@ void Person::rec_poison_dmg() {
 	}
 }
 
-//функция нанесения урона кровотечением
+//С„СѓРЅРєС†РёСЏ РЅР°РЅРµСЃРµРЅРёСЏ СѓСЂРѕРЅР° РєСЂРѕРІРѕС‚РµС‡РµРЅРёРµРј
 void Person::rec_bleed_dmg() {
 	if (_time_bleed != 0) {
 		_hp -= 5;

@@ -3,14 +3,14 @@
 
 class Person {
 protected:
-	int _hp; //здоровье
-	int _dmg; //урон
-	double _mana; //мана
-	bool _armor; //щит
-	int _time_bleed; //время кровточения
-	int _time_poison; //время отравления
+	int _hp; //Р·РґРѕСЂРѕРІСЊРµ
+	int _dmg; //СѓСЂРѕРЅ
+	double _mana; //РјР°РЅР°
+	bool _armor; //С‰РёС‚
+	int _time_bleed; //РІСЂРµРјСЏ РєСЂРѕРІС‚РѕС‡РµРЅРёСЏ
+	int _time_poison; //РІСЂРµРјСЏ РѕС‚СЂР°РІР»РµРЅРёСЏ
 public:
-	//Геттеры
+	//Р“РµС‚С‚РµСЂС‹
 	int hp() { return _hp; }
 	int dmg() { return _dmg; }
 	double mana() { return _mana; }
@@ -18,7 +18,7 @@ public:
 	int time_bleed() { return _time_bleed; }
 	int time_poison() { return _time_poison; }
 
-	//Сеттеры
+	//РЎРµС‚С‚РµСЂС‹
 	void Set_hp(int hp) { _hp = hp; }
 	void Set_dmg(int dmg) { _dmg = dmg; }
 	void Set_mana(double mana) { _mana = mana; }
@@ -26,32 +26,32 @@ public:
 	void Set_time_bleed(int time_bleed) { _time_bleed = time_bleed; }
 	void Set_time_poison(int time_poison) { _time_poison = time_poison; }
 
-	//Функции для добавления ходов к значениям отравления и кровотечения
+	//Р¤СѓРЅРєС†РёРё РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ С…РѕРґРѕРІ Рє Р·РЅР°С‡РµРЅРёСЏРј РѕС‚СЂР°РІР»РµРЅРёСЏ Рё РєСЂРѕРІРѕС‚РµС‡РµРЅРёСЏ
 	void app_time_bleed(int app_time_bleed) { _time_bleed += app_time_bleed; }
 	void app_time_poison(int app_time_poison) { _time_poison += app_time_poison; }
 
-	//пополнение маны
+	//РїРѕРїРѕР»РЅРµРЅРёРµ РјР°РЅС‹
 	void rise_mana(Person enemy);
 
-	//нанесение урона
+	//РЅР°РЅРµСЃРµРЅРёРµ СѓСЂРѕРЅР°
 	void deal_dmg(Person& enemy, int dmg);
 
-	//получение урона (recieve)
+	//РїРѕР»СѓС‡РµРЅРёРµ СѓСЂРѕРЅР° (recieve)
 	void rec_dmg(Person enemy) { _hp -= ((_armor == true) ? _armor = false : _dmg); }
 
-	//получение хп (recieve)
+	//РїРѕР»СѓС‡РµРЅРёРµ С…Рї (recieve)
 	void rec_hp(int val) { _hp += val; }
 
-	//обнуление маны
+	//РѕР±РЅСѓР»РµРЅРёРµ РјР°РЅС‹
 	void null_mana() { _mana = 0; }
 
-	//получение брони
+	//РїРѕР»СѓС‡РµРЅРёРµ Р±СЂРѕРЅРё
 	void recieve_armor() { _armor = true; }
 
-	//получение урона от отравления
+	//РїРѕР»СѓС‡РµРЅРёРµ СѓСЂРѕРЅР° РѕС‚ РѕС‚СЂР°РІР»РµРЅРёСЏ
 	void rec_poison_dmg();
 
-	//получение урона от кровотечения
+	//РїРѕР»СѓС‡РµРЅРёРµ СѓСЂРѕРЅР° РѕС‚ РєСЂРѕРІРѕС‚РµС‡РµРЅРёСЏ
 	void rec_bleed_dmg();
 };
 
