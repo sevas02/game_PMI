@@ -2,6 +2,7 @@
 #include <vector>
 #include "Wizard.h"
 #include "Person.h"
+#include <ctime>
 using namespace std;
 
 Wizard::Wizard() {
@@ -13,22 +14,28 @@ Wizard::Wizard() {
 	_time_poison = 0;
 }
 
-void Wizard::super_healing(Person &kent) {
-	//надо брать максимум, а не над текущее значениее kent.hp
-	int val = kent.hp * val_heal;
+void Wizard::super_healing(Person& kent) {
+	//надо брать максимум, а не текущее значение kent.hp
+	int val = kent.hp() * val_heal;
 	kent.rec_hp(val);
 	null_mana();
 }
 
 void Wizard::super_fire_punch(vector<Person>& enemies) {
+	srand(time(0));
 	//рандомим событие
 	int num = rand() % 10 + 1;
 	//рандомим врага
 	int idx = rand() % (enemies.size() - 1);
 	//урон при срабатывании пассивки (50% от базового)
 	int temp_dmg = 0.5*_dmg;
-	if (num <= 2) 
+	if (num <= 2) {
 		deal_dmg(enemies[idx], temp_dmg);
+		cout << "Нанесен урон противнику с номером " << idx << "у него осталось " << enemies[idx].hp() << "хп" << endl;
+	}
+	else
+		cout << "Выпал номер " << num << endl;
+
 }
 
 Wizard::~Wizard() {
