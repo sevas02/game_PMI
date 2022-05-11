@@ -15,7 +15,7 @@ Wizard::Wizard() {
 }
 
 void Wizard::super_healing(Person& kent) {
-	//надо брать максимум, а не текущее значение kent.hp
+	//РЅР°РґРѕ Р±СЂР°С‚СЊ РјР°РєСЃРёРјСѓРј, Р° РЅРµ С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ kent.hp
 	int val = kent.hp() * val_heal;
 	kent.rec_hp(val);
 	null_mana();
@@ -23,18 +23,18 @@ void Wizard::super_healing(Person& kent) {
 
 void Wizard::super_fire_punch(vector<Person>& enemies) {
 	srand(time(0));
-	//рандомим событие
+	//СЂР°РЅРґРѕРјРёРј СЃРѕР±С‹С‚РёРµ
 	int num = rand() % 10 + 1;
-	//рандомим врага
+	//СЂР°РЅРґРѕРјРёРј РІСЂР°РіР°
 	int idx = rand() % (enemies.size() - 1);
-	//урон при срабатывании пассивки (50% от базового)
+	//СѓСЂРѕРЅ РїСЂРё СЃСЂР°Р±Р°С‚С‹РІР°РЅРёРё РїР°СЃСЃРёРІРєРё (50% РѕС‚ Р±Р°Р·РѕРІРѕРіРѕ)
 	int temp_dmg = 0.5*_dmg;
 	if (num <= 2) {
 		deal_dmg(enemies[idx], temp_dmg);
-		cout << "Нанесен урон противнику с номером " << idx << "у него осталось " << enemies[idx].hp() << "хп" << endl;
+		cout << "РќР°РЅРµСЃРµРЅ СѓСЂРѕРЅ РїСЂРѕС‚РёРІРЅРёРєСѓ СЃ РЅРѕРјРµСЂРѕРј " << idx << "Сѓ РЅРµРіРѕ РѕСЃС‚Р°Р»РѕСЃСЊ " << enemies[idx].hp() << "С…Рї" << endl;
 	}
 	else
-		cout << "Выпал номер " << num << endl;
+		cout << "Р’С‹РїР°Р» РЅРѕРјРµСЂ " << num << endl;
 
 }
 
