@@ -5,7 +5,7 @@
 #include "Person.h"
 using namespace std;
 
-class Archer : Person {
+class Archer : public Person {
 public:
 	//конструктор стрелка
 	Archer();
