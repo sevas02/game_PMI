@@ -7,6 +7,7 @@ using namespace std;
 
 Wizard::Wizard() {
 	_hp = 120;
+	_max_hp = 120;
 	_dmg = 30;
 	_mana = 0;
 	_armor = 0;
@@ -15,8 +16,7 @@ Wizard::Wizard() {
 }
 
 void Wizard::super_healing(Person& kent) {
-	//надо брать максимум, а не текущее значение kent.hp
-	int val = kent.hp() * val_heal;
+	int val = kent.max_hp() * val_heal;
 	kent.rec_hp(val);
 	null_mana();
 }
@@ -35,7 +35,6 @@ void Wizard::super_fire_punch(vector<Person>& enemies) {
 	}
 	else
 		cout << "Выпал номер " << num << endl;
-
 }
 
 Wizard::~Wizard() {
