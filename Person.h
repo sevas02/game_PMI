@@ -4,6 +4,7 @@
 class Person {
 protected:
 	int _hp; //здоровье
+	int _max_hp; //максимальное здоровье
 	int _dmg; //урон
 	double _mana; //мана
 	bool _armor; //щит
@@ -12,6 +13,7 @@ protected:
 public:
 	//Геттеры
 	int hp() { return _hp; }
+	int max_hp() { return _max_hp; }
 	int dmg() { return _dmg; }
 	double mana() { return _mana; }
 	bool armor() { return _armor; }
