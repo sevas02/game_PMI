@@ -2,7 +2,7 @@
 #define MONSTER
 #include "Person.h"
 #include <iostream>
-#include <deque>
+#include <vector>
 
 //базовый монстр
 //одна атака - нанесение урона с возможным отравлением(есть у всех монстров)
@@ -21,13 +21,14 @@ public:
 //монстр босс
 //Различия с обычным - больше здорвоья, есть защита, наносит больше урона
 //Супер удар - отравление всех персонажей оппонента
+
 class Monster_boss : public Monster_base {
 public:
 	//Конструктор
 	Monster_boss();
 
 	//функция супер атаки монстра босса
-	void Monster_boss_sup_attack(deque<Person> enemies);
+	void Monster_boss_sup_attack(std::vector<Person> enemies);
 
 	//Деструктор
 	~Monster_boss();
