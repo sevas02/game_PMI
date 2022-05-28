@@ -1,5 +1,11 @@
-#ifndef PERSON
+  #ifndef PERSON
 #define PERSON
+#include <string>
+#include <iostream>
+#include <ctime>
+#include <vector>
+#include "List.h"
+using namespace std;
 
 class Person {
 protected:
@@ -10,6 +16,7 @@ protected:
 	bool _armor; //щит
 	int _time_bleed; //время кровточения
 	int _time_poison; //время отравления
+	string _name;
 public:
 	//Геттеры
 	int hp() { return _hp; }
@@ -19,8 +26,9 @@ public:
 	bool armor() { return _armor; }
 	int time_bleed() { return _time_bleed; }
 	int time_poison() { return _time_poison; }
+	string name() { return _name; }
 
-	//Сеттеры
+		//Сеттеры
 	void Set_hp(int hp) { _hp = hp; }
 	void Set_dmg(int dmg) { _dmg = dmg; }
 	void Set_mana(double mana) { _mana = mana; }
@@ -33,10 +41,10 @@ public:
 	void app_time_poison(int app_time_poison) { _time_poison += app_time_poison; }
 
 	//пополнение маны
-	void rise_mana(Person enemy);
+	void rise_mana(Person* enemy);
 
 	//нанесение урона
-	void deal_dmg(Person& enemy, int dmg);
+	void deal_dmg(Person* enemy, int dmg);
 
 	//получение урона (recieve)
 	void rec_dmg(Person enemy) { _hp -= ((_armor == true) ? _armor = false : _dmg); }
@@ -55,6 +63,12 @@ public:
 
 	//получение урона от кровотечения
 	void rec_bleed_dmg();
+
+	//функция определения атаки у юнита
+	virtual void choose_attack() { ; }
+
+	friend ostream& operator<<(ostream& output, const Person& hero);
 };
+
 
 #endif
