@@ -1,4 +1,5 @@
 #include "Warrior.h"
+#include "List.h"
 using namespace std;
 
 //Конструктор 
@@ -33,7 +34,7 @@ void Warrior::give_shield(Person& ally) {
 // Cупер сила
 void Warrior::Warrior_super_attack() {
 	if (_mana < 50)
-		cout << "недостаточно маны" << endl;
+		cout << "недостаточно маны! " << endl;
 	else {
 		_hp += 30;
 		_dmg += 5;
@@ -55,6 +56,16 @@ void Warrior::Warrior_attack(Person& enemy) {
 	_mana += 10;
 }
 
-//функция блокировки монстра на 1 ход (т.е воин бросает сеть на монстра и он не активен на протяжении одного хода 
-/* функйии спецприемов, которые можно примерить при возникновении специфических ситуаций в бою
-   например, спецудар, который можно сделать только после того как вы заблокируете атаку монстра цитом*/
+void Warrior::choose_ability(list<Person*>& enemies) {
+	int idx;
+	cout << "Выберите действие: 1 - обычная ";
+	cin >> idx;
+	if (idx == 1) {
+		cout << "Выберите врага " << endl;
+		cin >> idx;
+		Person* man = enemies.find(idx - 1);
+		Warrior_attack(*man);
+	}
+	else
+		Warrior_super_attack();
+}
