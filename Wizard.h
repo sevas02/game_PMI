@@ -18,7 +18,10 @@ public:
 	void super_healing(Person* kent);
 
 	//огненная удача (с вероятностью 20% наносится удар рандомному врагу)
-	void super_fire_punch(vector<Person*>& enemies);
+	void super_fire_punch(list<Person*>& enemies);
+
+	//выбор способности
+	void choose_ability(list<Person*>& enemies, list<Person*>& kents);
 
 	//деструктор
 	~Wizard();

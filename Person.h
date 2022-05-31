@@ -4,6 +4,7 @@
 #include <iostream>
 #include <ctime>
 #include <vector>
+#include "List.h"
 using namespace std;
 
 class Person {
@@ -27,7 +28,7 @@ public:
 	int time_poison() { return _time_poison; }
 	string name() { return _name; }
 
-		//Сеттеры
+	//Сеттеры
 	void Set_hp(int hp) { _hp = hp; }
 	void Set_dmg(int dmg) { _dmg = dmg; }
 	void Set_mana(double mana) { _mana = mana; }
@@ -62,6 +63,9 @@ public:
 
 	//получение урона от кровотечения
 	void rec_bleed_dmg();
+
+	//функция определения атаки у юнита
+	virtual void choose_ability() { ; }
 
 	friend ostream& operator<<(ostream& output, const Person& hero);
 };
