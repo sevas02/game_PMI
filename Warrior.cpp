@@ -56,16 +56,23 @@ void Warrior::Warrior_attack(Person& enemy) {
 	_mana += 10;
 }
 
-void Warrior::choose_ability(list<Person*>& enemies) {
+void Warrior::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	int idx;
-	cout << "Выберите действие: 1 - обычная ";
+	cout << "Выберите действие: 1 - обычная атака, 2 - баффалка, 3 - снарядить щитом ";
 	cin >> idx;
 	if (idx == 1) {
-		cout << "Выберите врага " << endl;
+		cout << "Выберите врага\n";
 		cin >> idx;
 		Person* man = enemies.find(idx - 1);
 		Warrior_attack(*man);
 	}
-	else
+	if (idx == 2) {
 		Warrior_super_attack();
+	}
+	if (idx == 3) {
+		cout << "Выберите союзника\n";
+		cin >> idx;
+		Person* man = kents.find(idx - 1);
+		give_shield(*man);
+	}
 }

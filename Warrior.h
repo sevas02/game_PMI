@@ -21,7 +21,7 @@ public:
 	void Warrior_attack(Person& enemy);
 
 	// Функция выбора атаки
-	void choose_ability(list<Person*>& enemies);
+	void choose_ability(list<Person*>& enemies, list<Person*>& kents);
 };
 
 
