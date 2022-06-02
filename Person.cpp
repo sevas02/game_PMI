@@ -3,8 +3,8 @@
 using namespace std;
 
 //функция увелечения маны после удара
-void Person::rise_mana(Person enemy) {
-	if (enemy._hp <= 0) {
+void Person::rise_mana(Person* enemy) {
+	if (enemy->hp() <= 0) {
 		_mana += 0.5 * _dmg;
 	}
 	else {
@@ -13,12 +13,12 @@ void Person::rise_mana(Person enemy) {
 }
 
 //функция удара
-void Person::deal_dmg(Person& enemy, int dmg) {
-	if (enemy._armor == 1)
-		_armor = 0;
+void Person::deal_dmg(Person* enemy, int dmg) {
+	if (enemy->_armor)
+		enemy->Set_armor(0);
 	else
-		enemy._hp -= dmg;
-	if (enemy._hp <= 0)
+		enemy->Set_hp(enemy->hp() - dmg);
+	if (enemy->hp() <= 0)
 		cout << "умер" << "\n";
 	rise_mana(enemy);
 }
@@ -37,4 +37,8 @@ void Person::rec_bleed_dmg() {
 		_hp -= 5;
 		_time_bleed--;
 	}
+}
+
+ostream& operator<<(ostream& output, const Person& hero) {
+	return output << hero._name;
 }

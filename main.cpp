@@ -41,13 +41,13 @@ int main() {
 	for (int i = 0; i < 3; i++) {
 		idx = det_person(dark_warriors.find(i));
 		if (idx == 1)
-			dynamic_cast<Monster_base*>(dark_warriors.find(i))->choose_attack(light_warriors);
+			dynamic_cast<Monster_base*>(dark_warriors.find(i))->choose_ability(light_warriors);
 		else if (idx == 2)
-			dynamic_cast<Monster_boss*>(dark_warriors.find(i))->choose_attack(light_warriors);
+			dynamic_cast<Monster_boss*>(dark_warriors.find(i))->choose_ability(light_warriors);
 		else if (idx == 3)
-			dynamic_cast<Monster_base_better*>(dark_warriors.find(i))->choose_attack(light_warriors);
+			dynamic_cast<Monster_base_better*>(dark_warriors.find(i))->choose_ability(light_warriors);
 	}
-	cout << "Хп лука:" << luk->hp() << '\n'; 
+	cout << "Хп лука:" << luk->hp() << '\n';
 	delete def_mnstr;
 	delete boss_mnstr;
 	delete base_better_mnstr;

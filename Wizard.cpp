@@ -1,8 +1,5 @@
-#include <iostream>
-#include <vector>
 #include "Wizard.h"
-#include "Person.h"
-#include <ctime>
+#include "List.h"
 using namespace std;
 
 Wizard::Wizard() {
@@ -13,35 +10,60 @@ Wizard::Wizard() {
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
+	_name = "Маг";
 }
 
-void Wizard::super_healing(Person& kent) {
-	int val = kent.max_hp() * val_heal;
-	kent.rec_hp(val);
+void Wizard::super_healing(Person* kent) {
+	int val = kent->max_hp() * val_heal;
+	kent->rec_hp(val);
+	if (kent->hp() > kent->max_hp())
+		kent->Set_hp(kent->max_hp());
 	null_mana();
 }
 
-void Wizard::super_fire_punch(vector<Person>& enemies) {
+void Wizard::super_fire_punch(list<Person*>& enemies) {
 	srand(time(0));
 	//рандомим событие
 	int num = rand() % 10 + 1;
 	//рандомим врага
 	int idx = rand() % (enemies.size() - 1);
-	//урон при срабатывании пассивки (50% от базового)
-	int temp_dmg = 0.5*_dmg;
+	//урон при срабатывании пассивки (40% от базового)
+	int temp_dmg = val_fire_dmg * _dmg;
 	if (num <= 2) {
-		deal_dmg(enemies[idx], temp_dmg);
-		cout << "Нанесен урон противнику с номером " << idx << "у него осталось " << enemies[idx].hp() << "хп" << endl;
+		deal_dmg(enemies.find(idx), temp_dmg);
+		cout << "Нанесен урон противнику с номером " << idx << "у него осталось " << enemies.find(idx)->hp() << "хп" << endl;
 	}
 	else
 		cout << "Выпал номер " << num << endl;
+	null_mana();
+}
+
+void Wizard::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
+	int idx;
+	cout << "Выберите действие: 1 - обычная атака, 2 - лечение ";
+	cin >> idx;
+	if (idx == 1) {
+		cout << "Выберите противника " << "\n";
+		cin >> idx;
+		Person* enemy = enemies.find(idx - 1);
+		deal_dmg(enemy, _dmg);
+		super_fire_punch(enemies);
+	}
+	if (idx == 2) {
+		cout << "Выберите союзника " << "\n";
+		cin >> idx;
+		Person* kent = kents.find(idx - 1);
+		super_healing(kent);
+	}
 }
 
 Wizard::~Wizard() {
 	_hp = 0;
+	_max_hp = 0;
 	_dmg = 0;
 	_mana = 0;
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
+	_name = "";
 }

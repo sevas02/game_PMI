@@ -1,4 +1,4 @@
-﻿#include "Monsters.h"
+#include "Monsters.h"
 #include <iostream>
 #include <Windows.h>
 using namespace std;
@@ -29,16 +29,16 @@ void Monster_base::Monster_attack(Person& enemy) {
 	null_mana();
 }
 
-void Monster_base::choose_attack(list<Person*>& enemies) {
+void Monster_base::choose_ability(list<Person*>& enemies) {
 	int idx;
-	cout << "Choose attack: 1 - Normal";
+	cout << "Выберите действие: 1 - обычная атака ";
+	cin >> idx;
+	if (idx == 1) {
+		cout << "Выберите противника " << "\n";
 		cin >> idx;
-		if (idx == 1) {
-			cout << "Choose hero" << "\n";
-			cin >> idx;
-			Person* man = enemies.find(idx-1);
-			Monster_attack(*man);
-		}
+		Person* man = enemies.find(idx - 1);
+		Monster_attack(*man);
+	}
 }
 
 //Деструктор для базового монстра
@@ -75,14 +75,14 @@ void Monster_boss::Monster_boss_sup_attack(list<Person*>& enemies) {
 	null_mana();
 }
 
-void Monster_boss::choose_attack(list<Person*>& enimies) {
+void Monster_boss::choose_ability(list<Person*>& enimies) {
 	int idx;
-	cout << "Choose attack: 1 - Normal, 2 - Super";
+	cout << "Выберите действие: 1 - обычная атака, 2 - супер-пупер ";
 	cin >> idx;
 	if (idx == 1) {
-		cout << "Choose hero" << "\n";
+		cout << "Выберите противника " << "\n";
 		cin >> idx;
-		Person* man = enimies.find(idx-1);
+		Person* man = enimies.find(idx - 1);
 		Monster_attack(*man);
 	}
 	else
@@ -100,7 +100,7 @@ Monster_boss::~Monster_boss() {
 	_time_bleed = 0;
 	_time_poison = 0;
 	_name = "";
-} 
+}
 
 //конструктор для монстра (чуть лучше базового)
 Monster_base_better::Monster_base_better() {
@@ -122,18 +122,18 @@ void Monster_base_better::Monster_sup_attack(Person& enemy) {
 	enemy.rec_poison_dmg();
 }
 
-void Monster_base_better::choose_attack(list<Person*>& enemies) {
+void Monster_base_better::choose_ability(list<Person*>& enemies) {
 	int idx;
-	cout << "Choose attack: 1 - Normal, 2 - Super";
+	cout << "Выберите действие: 1 - обычная атака, 2 - супер-пупер ";
 	cin >> idx;
 	if (idx == 1) {
-		cout << "Choose hero" << "\n";
+		cout << "Выберите противника " << "\n";
 		cin >> idx;
 		Person* man = enemies.find(idx - 1);
 		Monster_attack(*man);
 	}
 	else {
-		cout << "Choose hero" << "\n";
+		cout << "Выберите противника " << "\n";
 		cin >> idx;
 		Person* man = enemies.find(idx - 1);
 		Monster_sup_attack(*man);
