@@ -5,41 +5,25 @@
 #include "Monsters.h"
 #include "Warrior.h"
 #include "List.h"
+#include "menu.h"
 using namespace std;
-
-int det_person(Person* hero) {
-	if (typeid(*hero) == typeid(Monster_base))
-		return 1;
-	else if (typeid(*hero) == typeid(Monster_boss))
-		return 2;
-	else if (typeid(*hero) == typeid(Monster_base_better))
-		return 3;
-	else
-		return -1;
-}
 
 int main() {
 	int idx = 0;
+	int num_heroes, num_evils;
 	SetConsoleCP(65001);
 	SetConsoleOutputCP(65001);
 	list<Person*> light_warriors;
 	list<Person*> dark_warriors;
-	cout << "Наши герои: Маг Лучник Воин" << "\n";
-	Wizard* mag = new Wizard();
-	Archer* luk = new Archer();
-	Warrior* war = new Warrior();
-	light_warriors.push_front(war);
-	light_warriors.push_front(luk);
-	light_warriors.push_front(mag);
-	Monster_base* def_mnstr = new Monster_base();
-	Monster_boss* boss_mnstr = new Monster_boss();
-	Monster_base_better* base_better_mnstr = new Monster_base_better();
-	dark_warriors.push_front(base_better_mnstr);
-	dark_warriors.push_front(boss_mnstr);
-	dark_warriors.push_front(def_mnstr);
-	cout << "Хп лука:" << luk->hp() << '\n';
+	cout << "Введите количество героев" << "\n";
+	cin >> num_heroes;
+	choose_light_person(light_warriors, num_heroes);
+	cout << "Введите количество злодеев" << "\n";
+	cin >> num_evils;
+	choose_dark_person(dark_warriors, num_evils);
+	cout << "Хп первого героя:" << light_warriors.find(0)->hp()<< '\n';
 	for (int i = 0; i < 3; i++) {
-		idx = det_person(dark_warriors.find(i));
+		idx = det_person_dark(dark_warriors.find(i));
 		if (idx == 1)
 			dynamic_cast<Monster_base*>(dark_warriors.find(i))->choose_ability(light_warriors);
 		else if (idx == 2)
@@ -47,12 +31,6 @@ int main() {
 		else if (idx == 3)
 			dynamic_cast<Monster_base_better*>(dark_warriors.find(i))->choose_ability(light_warriors);
 	}
-	cout << "Хп лука:" << luk->hp() << '\n';
-	delete def_mnstr;
-	delete boss_mnstr;
-	delete base_better_mnstr;
-	delete mag;
-	delete luk;
-	delete war;
+	cout << "Хп первого героя:" << light_warriors.find(0)->hp() << '\n';
 	return 0;
 }
