@@ -12,13 +12,13 @@ Monster_base::Monster_base() {
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
-	_name = "Порося";
+	_name = "Обычный монстр";
 }
 
 //функция атаки монстров
 void Monster_base::Monster_attack(Person& enemy) {
 	srand(time(0));
-	deal_dmg(&enemy, _dmg);
+	deal_dmg(&enemy, dmg());
 	int num = 1 + rand() % 10;
 	//урон нанесется с 20% шансом
 	if (num <= 2) {
@@ -31,6 +31,7 @@ void Monster_base::Monster_attack(Person& enemy) {
 
 void Monster_base::choose_ability(list<Person*>& enemies) {
 	int idx;
+	cout << "Вы ходите за обычного монстра" << "\n";
 	cout << "Выберите действие: 1 - обычная атака ";
 	cin >> idx;
 	if (idx == 1) {
@@ -77,6 +78,7 @@ void Monster_boss::Monster_boss_sup_attack(list<Person*>& enemies) {
 
 void Monster_boss::choose_ability(list<Person*>& enimies) {
 	int idx;
+	cout << "Вы ходите за монстра босса" << "\n";
 	cout << "Выберите действие: 1 - обычная атака, 2 - супер-атака ";
 	cin >> idx;
 	if (idx == 1) {
@@ -116,7 +118,7 @@ Monster_base_better::Monster_base_better() {
 
 //функция суперудара
 void Monster_base_better::Monster_sup_attack(Person& enemy) {
-	deal_dmg(&enemy, _dmg / 2);
+	deal_dmg(&enemy, dmg() / 2);
 	//5 - число ходов
 	enemy.app_time_poison(5);
 	enemy.rec_poison_dmg();
@@ -124,6 +126,7 @@ void Monster_base_better::Monster_sup_attack(Person& enemy) {
 
 void Monster_base_better::choose_ability(list<Person*>& enemies) {
 	int idx;
+	cout << "Вы ходите за улучшенного монстра" << "\n";
 	cout << "Выберите действие: 1 - обычная атака, 2 - супер-пупер ";
 	cin >> idx;
 	if (idx == 1) {
@@ -164,7 +167,7 @@ Monster_vampire::Monster_vampire() {
 }
 
 void Monster_vampire::vampire_attack(Person& enemy) {
-	deal_dmg(&enemy, _dmg / 2);
+	deal_dmg(&enemy, dmg() / 2);
 	//5 - число ходов
 	enemy.app_time_bleed(5);
 	enemy.rec_bleed_dmg();

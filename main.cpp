@@ -21,16 +21,9 @@ int main() {
 	cout << "Введите количество злодеев" << "\n";
 	cin >> num_evils;
 	choose_dark_person(dark_warriors, num_evils);
-	cout << "Хп первого героя:" << light_warriors.find_value(0)->hp()<< '\n';
-	for (int i = 0; i < 3; i++) {
-		idx = get_idx_dark(dark_warriors.find_value(i));
-		if (idx == 1)
-			dynamic_cast<Monster_base*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
-		else if (idx == 2)
-			dynamic_cast<Monster_boss*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
-		else if (idx == 3)
-			dynamic_cast<Monster_base_better*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
+	while (dark_warriors.size() != 0 || light_warriors.size() != 0) {
+		dark_persons_step(dark_warriors, light_warriors);
+		light_persons_step(dark_warriors, light_warriors);
 	}
-	cout << "Хп первого героя:" << light_warriors.find_value(0)->hp() << '\n';
 	return 0;
 } 

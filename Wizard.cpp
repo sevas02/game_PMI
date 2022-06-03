@@ -26,9 +26,9 @@ void Wizard::super_fire_punch(list<Person*>& enemies) {
 	//рандомим событие
 	int num = rand() % 10 + 1;
 	//рандомим врага
-	int idx = rand() % (enemies.size() - 1);
+	int idx = rand() % (enemies.size());
 	//урон при срабатывании пассивки (40% от базового)
-	int temp_dmg = val_fire_dmg * _dmg;
+	int temp_dmg = val_fire_dmg * dmg();
 	if (num <= 2) 
 		deal_dmg(enemies.find_value(idx), temp_dmg);
 }
@@ -41,7 +41,7 @@ void Wizard::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 		cout << "Выберите противника\n";
 		cin >> idx;
 		Person* enemy = enemies.find_value(idx - 1);
-		deal_dmg(enemy, _dmg);
+		deal_dmg(enemy, dmg());
 		super_fire_punch(enemies);
 	}
 	if (idx == 2) {

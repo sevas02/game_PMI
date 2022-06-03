@@ -2,6 +2,7 @@
 #define LIST_H
 
 #include <iostream>
+#include "Person.h"
 using namespace std;
 
 template <class T>
@@ -39,7 +40,6 @@ public:
 	void delete_last();
 	void delete_front();
 	T find_value(int idx);
-	void print();
 };
 
 template <class T> list<T>::~list() {
@@ -112,7 +112,8 @@ template <class T> void list<T>::delete_element(int idx) {
 	_size--;
 }
 
-template <class T> T list<T>::find_value(int idx) {
+template <class T> 
+T list<T>::find_value(int idx) {
 	node<T>* elem = _first;
 	while (idx > 0) {
 		elem = elem->_next;
@@ -121,12 +122,5 @@ template <class T> T list<T>::find_value(int idx) {
 	return elem->_value;
 }
 
-template <class T> void list<T>::print() {
-	node<T>* curr = _first;
-	while (curr != 0) {
-		cout << curr->value() << "\n";
-		curr = curr->_next;
-	}
-}
 
 #endif

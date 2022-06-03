@@ -11,7 +11,7 @@ Warrior::Warrior() {
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
-	//_name = "Воин";
+	_name = "Воин";
 }
 
 //Деструктор 
@@ -23,7 +23,7 @@ Warrior::~Warrior() {
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
-	//_name = "";
+	_name = "";
 }
 
 // дать бронь союзникам
@@ -58,7 +58,7 @@ void Warrior::Warrior_attack(Person& enemy) {
 
 void Warrior::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	int idx;
-	cout << "Выберите действие: 1 - обычная атака, 2 - баффалка, 3 - снарядить щитом ";
+	cout << "Выберите действие: 1 - обычная атака, 2 - улучшение война, 3 - снарядить щитом война" << "\n";
 	cin >> idx;
 	if (idx == 1) {
 		cout << "Выберите врага\n";
