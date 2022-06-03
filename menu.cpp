@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "Checkers.h"
 #include <iostream>
 using namespace std;
 
@@ -10,32 +11,32 @@ void print(list<Person*>& list) {
 }
 
 void choose_light_person(list<Person*>& light_warriors, int num) {
-	int hero_num, idx = 0;
+	int hero_num, index = 0;
 	Wizard* mag;
 	Warrior* war;
 	Archer* arch;
 	cout << "Выберите светлого персонажа:" << '\n';
 	cout << "1 - Маг, 2 - Воин, 3 - Лучник" << '\n';
-	while (idx !=num) {
-		cin >> hero_num;
+	while (index !=num) {
+		hero_num = idx(3);
 		switch (hero_num) {
 
 		case 1:
 		mag = new Wizard();
 		light_warriors.push_front(mag); 
-		idx++; 
+		index++; 
 		break;
 
 		case 2:
 		war = new Warrior();
 		light_warriors.push_front(war);
-		idx++;
+		index++;
 		break;
 
 		case 3:
 		arch = new Archer();
 		light_warriors.push_front(arch);
-		idx++;
+		index++;
 		break;
 		}
 
@@ -45,32 +46,32 @@ void choose_light_person(list<Person*>& light_warriors, int num) {
 }
 
 void choose_dark_person(list<Person*>& dark_warriors, int num) {
-	int monster_num, idx = 0;
+	int monster_num, index = 0;
 	Monster_base* m_b;
 	Monster_base_better* m_b_b;
 	Monster_boss* m_boss;
 	cout << "Выберите темного персонажа:" << "\n";
 	cout << "1 - Обычный монстр, 2 - Улучшенный монстр, 3 - Босс" << '\n';
-	while (idx != num) {
-		cin >> monster_num;
+	while (index != num) {
+		monster_num = idx(3);
 		switch (monster_num) {
 
 		case 1:
 		m_b = new Monster_base();
 		dark_warriors.push_front(m_b);
-		idx++;
+		index++;
 		break;
 
 		case 2:
 		m_b_b = new Monster_base_better();
 		dark_warriors.push_front(m_b_b);
-		idx++;
+		index++;
 		break;
 
 		case 3:
 		m_boss = new Monster_boss();
 		dark_warriors.push_front(m_boss);
-		idx++; 
+		index++; 
 		break;
 		}
 	}

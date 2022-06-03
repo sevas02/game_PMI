@@ -6,6 +6,7 @@
 #include "Warrior.h"
 #include "List.h"
 #include "menu.h"
+#include "Checkers.h"
 using namespace std;
 
 int main() {
@@ -16,12 +17,12 @@ int main() {
 	list<Person*> light_warriors;
 	list<Person*> dark_warriors;
 	cout << "Введите количество героев" << "\n";
-	cin >> num_heroes;
+	num_heroes = heroes_num();
 	choose_light_person(light_warriors, num_heroes);
 	cout << "Введите количество злодеев" << "\n";
-	cin >> num_evils;
+	num_evils = heroes_num();
 	choose_dark_person(dark_warriors, num_evils);
-	while (dark_warriors.size() != 0 || light_warriors.size() != 0) {
+	while (dark_warriors.size() != 0 && light_warriors.size() != 0) {
 		dark_persons_step(dark_warriors, light_warriors);
 		light_persons_step(dark_warriors, light_warriors);
 	}

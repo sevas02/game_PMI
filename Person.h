@@ -5,6 +5,7 @@
 #include <ctime>
 #include <vector>
 #include "List.h"
+#include "Checkers.h"
 using namespace std;
 
 class Person {
