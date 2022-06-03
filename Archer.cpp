@@ -35,7 +35,7 @@ void Archer::hail_of_arrows(list<Person*>& enemies) {
 	int temp_dmg = _dmg * 0.75;
 
 	for (int i = 0; i < enemies.size(); i++) {
-		deal_dmg(enemies.find(i), temp_dmg);
+		deal_dmg(enemies.find_value(i), temp_dmg);
 
 		//srand - инициализация генератора случайных чисел
 		//time - возвращает текущее календарное время системы
@@ -44,8 +44,8 @@ void Archer::hail_of_arrows(list<Person*>& enemies) {
 
 		//с вероятностью 10% противник может получить отравленную стрелу
 		if (number <= 1 ) {
-			enemies.find(i)->app_time_poison(3);
-			enemies.find(i)->rec_poison_dmg();
+			enemies.find_value(i)->app_time_poison(3);
+			enemies.find_value(i)->rec_poison_dmg();
 		}
 	}
 	//обнуление только что потраченной маны
@@ -59,13 +59,13 @@ void Archer::choose_ability(list<Person*>& enemies) {
 	if (idx == 1) {
 		cout << "Выберите противника\n";
 		cin >> idx;
-		Person* enemy = enemies.find(idx - 1);
+		Person* enemy = enemies.find_value(idx - 1);
 		deal_dmg(enemy, _dmg);
 	}
 	if (idx == 2) {
 		cout << "Выберите противника\n";
 		cin >> idx;
-		Person* enemy = enemies.find(idx - 1);
+		Person* enemy = enemies.find_value(idx - 1);
 		super_arrow_shot(enemy);
 	}
 	if (idx == 3) {

@@ -30,7 +30,7 @@ void Wizard::super_fire_punch(list<Person*>& enemies) {
 	//урон при срабатывании пассивки (40% от базового)
 	int temp_dmg = val_fire_dmg * _dmg;
 	if (num <= 2) 
-		deal_dmg(enemies.find(idx), temp_dmg);
+		deal_dmg(enemies.find_value(idx), temp_dmg);
 }
 
 void Wizard::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
@@ -40,14 +40,14 @@ void Wizard::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	if (idx == 1) {
 		cout << "Выберите противника\n";
 		cin >> idx;
-		Person* enemy = enemies.find(idx - 1);
+		Person* enemy = enemies.find_value(idx - 1);
 		deal_dmg(enemy, _dmg);
 		super_fire_punch(enemies);
 	}
 	if (idx == 2) {
 		cout << "Выберите союзника\n";
 		cin >> idx;
-		Person* kent = kents.find(idx - 1);
+		Person* kent = kents.find_value(idx - 1);
 		super_healing(kent);
 	}
 }

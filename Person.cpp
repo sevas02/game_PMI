@@ -18,8 +18,6 @@ void Person::deal_dmg(Person* enemy, int dmg) {
 		enemy->Set_armor(0);
 	else
 		enemy->Set_hp(enemy->hp() - dmg);
-	if (enemy->hp() <= 0)
-		cout << "умер" << "\n";
 	rise_mana(enemy);
 }
 
@@ -39,6 +37,19 @@ void Person::rec_bleed_dmg() {
 	}
 }
 
-ostream& operator<<(ostream& output, const Person& hero) {
-	return output << hero._name;
+inline ostream& operator<<(ostream& output, const Person& hero) {
+	output << hero._name << "\n";
+	output << "Количество здоровья: " << hero._hp << "\n";
+	return output;
+}
+
+void Person::operator =(Person& per) {
+	_hp = per._hp;
+	_max_hp = per._max_hp; 
+	_dmg = per._dmg; 
+	_mana = per._mana; 
+	_armor = per._armor; 
+	_time_bleed = per._time_bleed; 
+	_time_poison = per._time_poison; 
+	_name = per._name;
 }

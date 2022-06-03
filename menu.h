@@ -13,9 +13,14 @@ void choose_light_person(list<Person*>& light_warriors, int num);
 
 void choose_dark_person(list<Person*>& dark_warriors, int num);
 
-int det_person_dark(Person* hero);
+int get_idx_dark(Person* hero);
 
-int det_person_light(Person* hero);
+int get_idx_light(Person* hero);
 
+void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors);
+
+void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors);
+
+void check_person_hp(list<Person*> heroes);
 
 #endif

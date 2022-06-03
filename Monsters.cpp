@@ -36,7 +36,7 @@ void Monster_base::choose_ability(list<Person*>& enemies) {
 	if (idx == 1) {
 		cout << "Выберите противника " << "\n";
 		cin >> idx;
-		Person* man = enemies.find(idx - 1);
+		Person* man = enemies.find_value(idx - 1);
 		Monster_attack(*man);
 	}
 }
@@ -69,20 +69,20 @@ Monster_boss::Monster_boss() {
 //Супер атака босса монстра
 void Monster_boss::Monster_boss_sup_attack(list<Person*>& enemies) {
 	for (int i = 0; i < enemies.size(); i++) {
-		enemies.find(i)->app_time_poison(5);
-		enemies.find(i)->rec_poison_dmg();
+		enemies.find_value(i)->app_time_poison(5);
+		enemies.find_value(i)->rec_poison_dmg();
 	}
 	null_mana();
 }
 
 void Monster_boss::choose_ability(list<Person*>& enimies) {
 	int idx;
-	cout << "Выберите действие: 1 - обычная атака, 2 - супер-пупер ";
+	cout << "Выберите действие: 1 - обычная атака, 2 - супер-атака ";
 	cin >> idx;
 	if (idx == 1) {
 		cout << "Выберите противника " << "\n";
 		cin >> idx;
-		Person* man = enimies.find(idx - 1);
+		Person* man = enimies.find_value(idx - 1);
 		Monster_attack(*man);
 	}
 	else
@@ -129,13 +129,13 @@ void Monster_base_better::choose_ability(list<Person*>& enemies) {
 	if (idx == 1) {
 		cout << "Выберите противника " << "\n";
 		cin >> idx;
-		Person* man = enemies.find(idx - 1);
+		Person* man = enemies.find_value(idx - 1);
 		Monster_attack(*man);
 	}
 	else {
 		cout << "Выберите противника " << "\n";
 		cin >> idx;
-		Person* man = enemies.find(idx - 1);
+		Person* man = enemies.find_value(idx - 1);
 		Monster_sup_attack(*man);
 	}
 }

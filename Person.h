@@ -67,8 +67,13 @@ public:
 	//функция определения атаки у юнита
 	virtual void choose_ability() { ; }
 
-	friend ostream& operator<<(ostream& output, const Person& hero);
+	//friend ostream& operator<<(ostream& output, const Person& hero);
+
+	friend ostream& operator<<(ostream& output, const Person& stud);
+
+	void operator=(Person& hero);
 };
+
 
 
 #endif

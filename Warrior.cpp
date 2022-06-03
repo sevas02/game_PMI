@@ -63,7 +63,7 @@ void Warrior::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	if (idx == 1) {
 		cout << "Выберите врага\n";
 		cin >> idx;
-		Person* man = enemies.find(idx - 1);
+		Person* man = enemies.find_value(idx - 1);
 		Warrior_attack(*man);
 	}
 	if (idx == 2) {
@@ -72,7 +72,7 @@ void Warrior::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	if (idx == 3) {
 		cout << "Выберите союзника\n";
 		cin >> idx;
-		Person* man = kents.find(idx - 1);
+		Person* man = kents.find_value(idx - 1);
 		give_shield(*man);
 	}
 }

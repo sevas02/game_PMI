@@ -24,5 +24,4 @@ public:
 	void choose_ability(list<Person*>& enemies, list<Person*>& kents);
 };
 
-
 #endif//WARRIOR

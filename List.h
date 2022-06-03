@@ -12,8 +12,8 @@ private:
 	node<T>* _prev;
 	node(T k) { _value = k; _next = _prev = 0; }
 public:
-	void next() { return _next; }
-	void value() { return _value; }
+	node<T>* next() { return _next; }
+	T value() { return _value; }
 	void set_value(T val) { _value = value; }
 	template <class T1> friend class list;
 };
@@ -35,9 +35,11 @@ public:
 	node<T>* create_node(T info);
 	void push_front(T value);
 	void push_back(T value);
+	void delete_element(int);
 	void delete_last();
 	void delete_front();
-	T find(int idx);
+	T find_value(int idx);
+	void print();
 };
 
 template <class T> list<T>::~list() {
@@ -85,6 +87,7 @@ template <class T> void list<T>::delete_last() {
 	_last->_prev = _last;
 	_last->_next = 0;
 	delete new_elem;
+	_size--;
 }
 
 template <class T> void list<T>::delete_front() {
@@ -92,9 +95,24 @@ template <class T> void list<T>::delete_front() {
 	_last->_next = _first;
 	_first->_prev = 0;
 	delete new_elem;
+	_size--;
 }
 
-template <class T> T list<T>::find(int idx) {
+template <class T> void list<T>::delete_element(int idx) {
+	node<T>* elem = _first;
+	while (idx > 0) {
+		elem = elem->_next;
+		idx--;
+	}
+	if (elem->_prev == 0)
+		_first = elem->_next;
+	else
+		elem->_prev->_next = elem->_next;
+	delete elem;
+	_size--;
+}
+
+template <class T> T list<T>::find_value(int idx) {
 	node<T>* elem = _first;
 	while (idx > 0) {
 		elem = elem->_next;
@@ -102,4 +120,13 @@ template <class T> T list<T>::find(int idx) {
 	}
 	return elem->_value;
 }
+
+template <class T> void list<T>::print() {
+	node<T>* curr = _first;
+	while (curr != 0) {
+		cout << curr->value() << "\n";
+		curr = curr->_next;
+	}
+}
+
 #endif
