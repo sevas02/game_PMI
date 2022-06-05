@@ -1,4 +1,7 @@
 #include "Archer.h"
+#include "menu.h"
+#define underline "\033[4m"
+#define no_underline "\033[0m"
 using namespace std;
 
 //конструктор стрелка
@@ -11,6 +14,12 @@ Archer::Archer() {
 	_time_bleed = 0;
 	_time_poison = 0;
 	_name = "Лучник";
+}
+
+//обычная атака
+void Archer::simple_attack(Person* enemy) {
+	srand(time(0));
+	deal_dmg(enemy, _dmg);
 }
 
 //супервыстрел стрелой с последующим кровотечением у противника
@@ -54,21 +63,24 @@ void Archer::hail_of_arrows(list<Person*>& enemies) {
 
 void Archer::choose_ability(list<Person*>& enemies) {
 	int idx;
-	cout << "Выберите действие: 1 - обычная атака, 2 - супервыстрел, 3 - град стрел ";
-	cin >> idx;
+	cout << underline << "\nВы ходите за лучника\n" << no_underline;
+	cout << "Выберите действие:\n1.обычная атака\n2.супервыстрел\n3.град стрел\n ";
+	idx = check_idx(3);
 	if (idx == 1) {
-		cout << "Выберите противника\n";
-		cin >> idx;
+		cout << underline << "\nВыберите противника:" << no_underline;
+		print(enemies);
+		idx = check_idx(enemies.size());
 		Person* enemy = enemies.find_value(idx - 1);
-		deal_dmg(enemy, _dmg);
+		simple_attack(enemy);
 	}
-	if (idx == 2) {
-		cout << "Выберите противника\n";
-		cin >> idx;
+	else if (idx == 2) {
+		cout << underline << "\nВыберите противника:\n" << no_underline;
+		print(enemies);
+		idx = check_idx(enemies.size());
 		Person* enemy = enemies.find_value(idx - 1);
 		super_arrow_shot(enemy);
 	}
-	if (idx == 3) {
+	else if (idx == 3) {
 		hail_of_arrows(enemies);
 	}
 }

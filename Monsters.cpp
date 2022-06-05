@@ -1,7 +1,10 @@
 #include "Monsters.h"
+#include "menu.h"
 #include "Checkers.h"
 #include <iostream>
 #include <Windows.h>
+#define underline "\033[4m"
+#define no_underline "\033[0m"
 using namespace std;
 
 //Конструктор для базового монстра
@@ -32,12 +35,13 @@ void Monster_base::Monster_attack(Person& enemy) {
 
 void Monster_base::choose_ability(list<Person*>& enemies) {
 	int index;
-	cout << "Вы ходите за обычного монстра" << "\n";
-	cout << "Выберите действие: 1 - обычная атака, 2 - ничего...";
-	index = idx(2);
+	cout << underline << "\nВы ходите за обычного монстра\n" << no_underline;
+	cout << "Выберите действие:\n1.обычная атака\n2.ничего...\n";
+	index = check_idx(2);
 	if (index == 1) {
-		cout << "Выберите противника " << "\n";
-		index = idx(enemies.size());
+		cout << underline << "\nВыберите противника " << no_underline << "\n";
+		print(enemies);
+		index = check_idx(enemies.size());
 		Person* man = enemies.find_value(index - 1);
 		Monster_attack(*man);
 	}
@@ -77,19 +81,20 @@ void Monster_boss::Monster_boss_sup_attack(list<Person*>& enemies) {
 	null_mana();
 }
 
-void Monster_boss::choose_ability(list<Person*>& enimies) {
+void Monster_boss::choose_ability(list<Person*>& enemies) {
 	int index;
-	cout << "Вы ходите за монстра босса" << "\n";
-	cout << "Выберите действие: 1 - обычная атака, 2 - супер-атака ";
-	index = idx(2);
+	cout << underline << "Вы ходите за монстра босса\n" << no_underline;
+	cout << "Выберите действие:\n1.обычная атака\n2.супер-атака\n";
+	index = check_idx(2);
 	if (index == 1) {
-		cout << "Выберите противника " << "\n";
-		index = idx(enimies.size());
-		Person* man = enimies.find_value(index - 1);
+		cout << underline << "\nВыберите противника " << no_underline << "\n";
+		print(enemies);
+		index = check_idx(enemies.size());
+		Person* man = enemies.find_value(index - 1);
 		Monster_attack(*man);
 	}
 	else
-		Monster_boss_sup_attack(enimies);
+		Monster_boss_sup_attack(enemies);
 
 }
 
@@ -127,18 +132,20 @@ void Monster_base_better::Monster_sup_attack(Person& enemy) {
 
 void Monster_base_better::choose_ability(list<Person*>& enemies) {
 	int index;
-	cout << "Вы ходите за улучшенного монстра" << "\n";
-	cout << "Выберите действие: 1 - обычная атака, 2 - супер-атака " <<"\n";
-	index = idx(2);
+	cout << underline << "Вы ходите за улучшенного монстра\n" << no_underline;
+	cout << "\nВыберите действие:\n1.обычная атака\n2.супер-атака " <<"\n";
+	index = check_idx(2);
 	if (index == 1) {
-		cout << "Выберите противника " << "\n";
-		index = idx(enemies.size());
+		cout << underline << "\nВыберите противника " << no_underline << "\n";
+		print(enemies);
+		index = check_idx(enemies.size());
 		Person* man = enemies.find_value(index - 1);
 		Monster_attack(*man);
 	}
 	else {
-		cout << "Выберите противника " << "\n";
-		index = idx(enemies.size());
+		cout << underline << "\nВыберите противника " << no_underline << "\n";
+		print(enemies);
+		index = check_idx(enemies.size());
 		Person* man = enemies.find_value(index - 1);
 		Monster_sup_attack(*man);
 	}

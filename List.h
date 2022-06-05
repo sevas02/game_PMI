@@ -40,6 +40,7 @@ public:
 	void delete_last();
 	void delete_front();
 	T find_value(int idx);
+	void print();
 };
 
 template <class T> list<T>::~list() {
@@ -122,5 +123,14 @@ T list<T>::find_value(int idx) {
 	return elem->_value;
 }
 
+template <class T> void list<T>::print() {
+	node<T>* elem = _first;
+	int idx = 1;
+	while (elem != 0) {
+		cout << idx << "." << elem->_value << endl;
+		idx++;
+		elem = elem->_next;
+	}
+}
 
 #endif

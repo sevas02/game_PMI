@@ -10,6 +10,9 @@ public:
 	//конструктор стрелка
 	Archer();
 
+	//обычная атака
+	void simple_attack(Person* enemy);
+
 	//супервыстрел стрелой с последующим кровотечением у противника
 	void super_arrow_shot(Person* enemy);
 

@@ -1,12 +1,15 @@
 #include "menu.h"
 #include "Checkers.h"
 #include <iostream>
+#define underline "\033[4m"
+#define no_underline "\033[0m"
+
 using namespace std;
 
 void print(list<Person*>& list) {
 	for (int i = 0; i < list.size(); i++) {
 	Person* obj = list.find_value(i);
-		cout << *obj << " \n";
+		cout << "\n" << i + 1 << "."  << *obj << " \n";
 	}
 }
 
@@ -15,10 +18,10 @@ void choose_light_person(list<Person*>& light_warriors, int num) {
 	Wizard* mag;
 	Warrior* war;
 	Archer* arch;
-	cout << "Выберите светлого персонажа:" << '\n';
-	cout << "1 - Маг, 2 - Воин, 3 - Лучник" << '\n';
+	cout << underline << "\nВыберите светлого персонажа:" << no_underline << '\n';
+	cout << "1.Маг\n2.Воин\n3.Лучник" << '\n';
 	while (index !=num) {
-		hero_num = idx(3);
+		hero_num = check_idx(3);
 		switch (hero_num) {
 
 		case 1:
@@ -41,7 +44,7 @@ void choose_light_person(list<Person*>& light_warriors, int num) {
 		}
 
 	}
-	cout << "Ваш выбор:" << "\n";
+	cout << underline << "\nВаш выбор:" << no_underline << "\n";
 	print(light_warriors);
 }
 
@@ -50,10 +53,10 @@ void choose_dark_person(list<Person*>& dark_warriors, int num) {
 	Monster_base* m_b;
 	Monster_base_better* m_b_b;
 	Monster_boss* m_boss;
-	cout << "Выберите темного персонажа:" << "\n";
-	cout << "1 - Обычный монстр, 2 - Улучшенный монстр, 3 - Босс" << '\n';
+	cout << underline << "\nВыберите темного персонажа:" << no_underline << "\n";
+	cout << "1.Обычный монстр\n2.Улучшенный монстр\n3.Босс" << '\n';
 	while (index != num) {
-		monster_num = idx(3);
+		monster_num = check_idx(3);
 		switch (monster_num) {
 
 		case 1:
@@ -75,7 +78,7 @@ void choose_dark_person(list<Person*>& dark_warriors, int num) {
 		break;
 		}
 	}
-	cout << "Ваш выбор:" << "\n";
+	cout << underline << "\nВаш выбор:" << no_underline << "\n";
 	print(dark_warriors);
 }
 
@@ -101,43 +104,48 @@ int get_idx_light(Person* hero) {
 		return -1;
 }
 
-void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors) {
+void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors, int i) {
 	int idx = 0;
-	for (int i = 0; i < dark_warriors.size(); i++) {
+	idx = get_idx_dark(dark_warriors.find_value(i));
+	if (idx == 1)
+		dynamic_cast<Monster_base*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
+	else if (idx == 2)
+		dynamic_cast<Monster_boss*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
+	else if (idx == 3)
+		dynamic_cast<Monster_base_better*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
+	check_person_hp(light_warriors);
+	if (light_warriors.size() != 0) {
+		cout << underline << "\nПротивники:\n" << no_underline;
 		print(light_warriors);
-		idx = get_idx_dark(dark_warriors.find_value(i));
-		if (idx == 1)
-			dynamic_cast<Monster_base*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
-		else if (idx == 2)
-			dynamic_cast<Monster_boss*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
-		else if (idx == 3)
-			dynamic_cast<Monster_base_better*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
-		check_person_hp(light_warriors);
 	}
+	
 }
 
-void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors) {
+void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors, int i) {
 	int idx = 0;
-	for (int i = 0; i < light_warriors.size(); i++) {
+	idx = get_idx_light(light_warriors.find_value(i));
+	if (idx == 1)
+		dynamic_cast<Wizard*>(light_warriors.find_value(i))->choose_ability(dark_warriors, light_warriors);
+	else if (idx == 2)
+		dynamic_cast<Warrior*>(light_warriors.find_value(i))->choose_ability(dark_warriors, light_warriors);
+	else if (idx == 3)
+		dynamic_cast<Archer*>(light_warriors.find_value(i))->choose_ability(dark_warriors);
+	check_person_hp(dark_warriors);
+	if (dark_warriors.size() != 0) {
+		cout << underline << "\nПротивники:\n" << no_underline;
 		print(dark_warriors);
-		idx = get_idx_light(light_warriors.find_value(i));
-		if (idx == 1)
-			dynamic_cast<Wizard*>(light_warriors.find_value(i))->choose_ability(dark_warriors, light_warriors);
-		else if (idx == 2)
-			dynamic_cast<Warrior*>(light_warriors.find_value(i))->choose_ability(dark_warriors, light_warriors);
-		else if (idx == 3)
-			dynamic_cast<Archer*>(light_warriors.find_value(i))->choose_ability(dark_warriors);
-		check_person_hp(dark_warriors);
 	}
+	
 }
 
 void check_person_hp(list<Person*>& heroes) {
 	for (int i = 0; i < heroes.size(); i++) {
 		if (heroes.find_value(i)->hp() <= 0) {
-			cout << heroes.find_value(i)->name() << " умер" << "\n";
+			cout << heroes.find_value(i)->name() << " мёртв" << "\n";
 			heroes.delete_element(i);
 		}
 	}
+	print(heroes);
 }
 
 

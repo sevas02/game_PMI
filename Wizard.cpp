@@ -1,5 +1,8 @@
 #include "Wizard.h"
 #include "List.h"
+#include "menu.h"
+#define underline "\033[4m"
+#define no_underline "\033[0m"
 using namespace std;
 
 Wizard::Wizard() {
@@ -35,18 +38,21 @@ void Wizard::super_fire_punch(list<Person*>& enemies) {
 
 void Wizard::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	int idx;
-	cout << "Выберите действие: 1 - обычная атака, 2 - лечение ";
-	cin >> idx;
+	cout << underline << "\nВы ходите за мага\n" << no_underline;
+	cout << "Выберите действие:\n1.обычная атака\n2.лечение\n";
+	idx = check_idx(2);
 	if (idx == 1) {
-		cout << "Выберите противника\n";
-		cin >> idx;
+		cout << underline << "\nВыберите противника\n" << no_underline;
+		print(enemies);
+		idx = check_idx(enemies.size());;
 		Person* enemy = enemies.find_value(idx - 1);
 		deal_dmg(enemy, dmg());
 		super_fire_punch(enemies);
 	}
-	if (idx == 2) {
-		cout << "Выберите союзника\n";
-		cin >> idx;
+	else if (idx == 2) {
+		cout << underline << "\nВыберите союзника\n" << no_underline;
+		print(kents);
+		idx = check_idx(kents.size());
 		Person* kent = kents.find_value(idx - 1);
 		super_healing(kent);
 	}
