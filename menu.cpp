@@ -104,7 +104,7 @@ int get_idx_light(Person* hero) {
 		return -1;
 }
 
-void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors, int i) {
+void dark_person_step(list<Person*>& dark_warriors, list<Person*>& light_warriors, int i) {
 	int idx = 0;
 	idx = get_idx_dark(dark_warriors.find_value(i));
 	if (idx == 1)
@@ -121,7 +121,7 @@ void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warrio
 	
 }
 
-void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors, int i) {
+void light_person_step(list<Person*>& dark_warriors, list<Person*>& light_warriors, int i) {
 	int idx = 0;
 	idx = get_idx_light(light_warriors.find_value(i));
 	if (idx == 1)
@@ -141,11 +141,13 @@ void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warri
 void check_person_hp(list<Person*>& heroes) {
 	for (int i = 0; i < heroes.size(); i++) {
 		if (heroes.find_value(i)->hp() <= 0) {
+			//светлокрасный цвет
+			SetColor(12, 0);
 			cout << heroes.find_value(i)->name() << " мёртв" << "\n";
+			SetColor(7, 0);
 			heroes.delete_element(i);
 		}
 	}
-	print(heroes);
 }
 
 

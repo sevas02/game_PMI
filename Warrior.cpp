@@ -61,7 +61,8 @@ void Warrior::Warrior_attack(Person& enemy) {
 
 void Warrior::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	int idx;
-	cout << underline << "\nВы ходите за воина\n" << no_underline;
+	cout << underline << "\nВы ходите за воина " <<
+		"| " << mana() << " ед. маны |\n" << no_underline;
 	cout << "Выберите действие:\n1.обычная атака\n2.улучшение воина\n3.снарядить щитом воина" << "\n";
 	idx = check_idx(3);
 	if (idx == 1) {
@@ -72,9 +73,19 @@ void Warrior::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 		Warrior_attack(*man);
 	}
 	else if (idx == 2) {
+		if (mana() <= 5) {
+			cout << "Недостаточно маны! Повторите ввод!\n";
+			choose_ability(enemies, kents);
+			return;
+		}
 		Warrior_super_attack();
 	}
 	else if (idx == 3) {
+		if (mana() <= 10) {
+			cout << "Недостаточно маны! Повторите ввод!\n";
+			choose_ability(enemies, kents);
+			return;
+		}
 		cout << underline << "\nВыберите союзника " << no_underline << "\n";
 		print(kents);
 		idx = check_idx(enemies.size());

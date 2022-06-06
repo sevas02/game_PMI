@@ -75,7 +75,8 @@ public:
 
 inline ostream& operator<<(ostream& output, const Person& hero) {
 	output << hero._name << "\n";
-	output << "Количество здоровья: " << hero._hp << "\n";
+	output << "Количество здоровья: " << hero._hp << "\n" <<
+		"Количество маны: " << hero._mana << "\n";
 	return output;
 }
 

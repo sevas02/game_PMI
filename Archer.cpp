@@ -63,7 +63,8 @@ void Archer::hail_of_arrows(list<Person*>& enemies) {
 
 void Archer::choose_ability(list<Person*>& enemies) {
 	int idx;
-	cout << underline << "\nВы ходите за лучника\n" << no_underline;
+	cout << underline << "\nВы ходите за лучника " <<
+		"| " << mana() << " ед. маны |\n" << no_underline;
 	cout << "Выберите действие:\n1.обычная атака\n2.супервыстрел\n3.град стрел\n ";
 	idx = check_idx(3);
 	if (idx == 1) {
@@ -74,6 +75,11 @@ void Archer::choose_ability(list<Person*>& enemies) {
 		simple_attack(enemy);
 	}
 	else if (idx == 2) {
+		if (mana() <= 5) {
+			cout << "Недостаточно маны! Повторите ввод!\n";
+			choose_ability(enemies);
+			return;
+		}
 		cout << underline << "\nВыберите противника:\n" << no_underline;
 		print(enemies);
 		idx = check_idx(enemies.size());
@@ -81,6 +87,11 @@ void Archer::choose_ability(list<Person*>& enemies) {
 		super_arrow_shot(enemy);
 	}
 	else if (idx == 3) {
+		if (mana() <= 10) {
+			cout << "Недостаточно маны! Повторите ввод!\n";
+			choose_ability(enemies);
+			return;
+		}
 		hail_of_arrows(enemies);
 	}
 }

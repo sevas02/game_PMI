@@ -6,9 +6,9 @@
 using namespace std;
 
 Wizard::Wizard() {
-	_hp = 120;
-	_max_hp = 120;
-	_dmg = 30;
+	_hp = 60;
+	_max_hp = 60;
+	_dmg = 200;
 	_mana = 0;
 	_armor = 0;
 	_time_bleed = 0;
@@ -38,7 +38,8 @@ void Wizard::super_fire_punch(list<Person*>& enemies) {
 
 void Wizard::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	int idx;
-	cout << underline << "\nВы ходите за мага\n" << no_underline;
+	cout << underline << "\nВы ходите за мага " <<
+		"| " << mana() << " ед. маны |\n" << no_underline;
 	cout << "Выберите действие:\n1.обычная атака\n2.лечение\n";
 	idx = check_idx(2);
 	if (idx == 1) {
@@ -50,6 +51,11 @@ void Wizard::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 		super_fire_punch(enemies);
 	}
 	else if (idx == 2) {
+		if (mana() <= 10) {
+			cout << "Недостаточно маны! Повторите ввод!\n";
+			choose_ability(enemies, kents);
+			return;
+		}
 		cout << underline << "\nВыберите союзника\n" << no_underline;
 		print(kents);
 		idx = check_idx(kents.size());

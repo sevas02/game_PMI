@@ -43,7 +43,8 @@ public:
 	void print();
 };
 
-template <class T> list<T>::~list() {
+template <class T> 
+list<T>::~list() {
 	if (_first == 0)
 		return;
 	node<T>* curr = _first;
@@ -57,7 +58,8 @@ template <class T> list<T>::~list() {
 	_first = 0;
 }
 
-template <class T> node<T>* list<T>::create_node(T info) {
+template <class T> 
+node<T>* list<T>::create_node(T info) {
 	node<T>* el = new node<T>{info};
 	el->_value = info;
 	el->_next = 0;
@@ -65,7 +67,8 @@ template <class T> node<T>* list<T>::create_node(T info) {
 	return el;
 }
 
-template <class T> void list<T>::push_front(T value) {
+template <class T> 
+void list<T>::push_front(T value) {
 	node<T>* new_el = create_node(value);
 	new_el->_next = _first;
 	_first = new_el;
@@ -74,7 +77,8 @@ template <class T> void list<T>::push_front(T value) {
 	_size++;
 }
 
-template <class T> void list<T>::push_back(T value) {
+template <class T> 
+void list<T>::push_back(T value) {
 	node<T>* new_el = create_node(value);
 	new_el->_prev = _last;
 	_last = new_el;
@@ -83,7 +87,8 @@ template <class T> void list<T>::push_back(T value) {
 	_size++;
 }
 
-template <class T> void list<T>::delete_last() {
+template <class T> 
+void list<T>::delete_last() {
 	node<T>* new_elem = _last;
 	_last->_prev = _last;
 	_last->_next = 0;
@@ -91,15 +96,17 @@ template <class T> void list<T>::delete_last() {
 	_size--;
 }
 
-template <class T> void list<T>::delete_front() {
+template <class T> 
+void list<T>::delete_front() {
 	node<T>* new_elem = _first;
 	_last->_next = _first;
 	_first->_prev = 0;
 	delete new_elem;
-	_size--;
+	_size--; 
 }
 
-template <class T> void list<T>::delete_element(int idx) {
+template <class T> 
+void list<T>::delete_element(int idx) {
 	node<T>* elem = _first;
 	while (idx > 0) {
 		elem = elem->_next;
@@ -123,7 +130,8 @@ T list<T>::find_value(int idx) {
 	return elem->_value;
 }
 
-template <class T> void list<T>::print() {
+template <class T> 
+void list<T>::print() {
 	node<T>* elem = _first;
 	int idx = 1;
 	while (elem != 0) {
