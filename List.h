@@ -71,6 +71,8 @@ template <class T>
 void list<T>::push_front(T value) {
 	node<T>* new_el = create_node(value);
 	new_el->_next = _first;
+	if (_first != 0)
+		_first->_prev = new_el;
 	_first = new_el;
 	if (_last == 0)
 		_last = new_el;
@@ -81,6 +83,8 @@ template <class T>
 void list<T>::push_back(T value) {
 	node<T>* new_el = create_node(value);
 	new_el->_prev = _last;
+	if (_last != 0)
+		_last->_next = new_el;
 	_last = new_el;
 	if (_first == 0)
 		_first = new_el;
@@ -112,8 +116,11 @@ void list<T>::delete_element(int idx) {
 		elem = elem->_next;
 		idx--;
 	}
-	if (elem->_prev == 0)
+	if (elem->_prev == 0) {
+		if (_size > 1)
+			elem->_next->_prev = 0;
 		_first = elem->_next;
+	}
 	else
 		elem->_prev->_next = elem->_next;
 	delete elem;
