@@ -30,14 +30,13 @@ void Monster_base::Monster_attack(Person& enemy) {
 		enemy.app_time_poison(3);
 		enemy.rec_poison_dmg();
 	}
-	null_mana();
 }
 
 void Monster_base::choose_ability(list<Person*>& enemies) {
 	int index;
 	cout << underline << "\nВы ходите за обычного монстра\n" << no_underline;
-	cout << "Выберите действие:\n1.обычная атака\n2.ничего...\n";
-	index = check_idx(2);
+	cout << "Выберите действие:\n1.обычная атака\n";
+	index = check_idx(1);
 	if (index == 1) {
 		cout << underline << "\nВыберите противника " << no_underline << "\n";
 		print(enemies);
@@ -83,7 +82,8 @@ void Monster_boss::Monster_boss_sup_attack(list<Person*>& enemies) {
 
 void Monster_boss::choose_ability(list<Person*>& enemies) {
 	int index;
-	cout << underline << "Вы ходите за монстра босса\n" << no_underline;
+	cout << underline << "Вы ходите за монстра босса" << "| " << mana() <<
+	" ед. маны |\n" << no_underline;
 	cout << "Выберите действие:\n1.обычная атака\n2.супер-атака\n";
 	index = check_idx(2);
 	if (index == 1) {
@@ -93,8 +93,14 @@ void Monster_boss::choose_ability(list<Person*>& enemies) {
 		Person* man = enemies.find_value(index - 1);
 		Monster_attack(*man);
 	}
-	else
+	else {
+		if (mana() <= 10) {
+			cout << "Недостаточно маны! Повторите ввод!\n";
+			choose_ability(enemies);
+			return;
+		}
 		Monster_boss_sup_attack(enemies);
+	}
 
 }
 
@@ -132,7 +138,8 @@ void Monster_base_better::Monster_sup_attack(Person& enemy) {
 
 void Monster_base_better::choose_ability(list<Person*>& enemies) {
 	int index;
-	cout << underline << "Вы ходите за улучшенного монстра\n" << no_underline;
+	cout << underline << "Вы ходите за улучшенного монстра" << "| " << mana() << 
+		" ед. маны |\n" << no_underline; no_underline;
 	cout << "\nВыберите действие:\n1.обычная атака\n2.супер-атака " <<"\n";
 	index = check_idx(2);
 	if (index == 1) {
@@ -143,6 +150,11 @@ void Monster_base_better::choose_ability(list<Person*>& enemies) {
 		Monster_attack(*man);
 	}
 	else {
+		if (mana() <= 10) {
+			cout << "Недостаточно маны! Повторите ввод!\n";
+			choose_ability(enemies);
+			return;
+		}
 		cout << underline << "\nВыберите противника " << no_underline << "\n";
 		print(enemies);
 		index = check_idx(enemies.size());
