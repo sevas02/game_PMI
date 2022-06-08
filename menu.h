@@ -21,10 +21,10 @@ int get_idx_dark(Person* hero);
 int get_idx_light(Person* hero);
 
 //ход тёмного персонажа
-void dark_person_step(list<Person*>& dark_warriors, list<Person*>& light_warriors, int i);
+void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors);
 
 //ход светлого персонажа
-void light_person_step(list<Person*>& dark_warriors, list<Person*>& light_warriors, int i);
+void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors);
 
 //проверка живой ли персонаж
 void check_person_hp(list<Person*>& heroes);

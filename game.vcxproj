@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClInclude Include="Archer.h" />
     <ClInclude Include="Checkers.h" />
+    <ClInclude Include="draw.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="Monsters.h" />
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClCompile Include="Archer.cpp" />
     <ClCompile Include="Checkers.cpp" />
+    <ClCompile Include="draw.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="Monsters.cpp" />

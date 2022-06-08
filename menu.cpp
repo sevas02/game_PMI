@@ -104,38 +104,34 @@ int get_idx_light(Person* hero) {
 		return -1;
 }
 
-void dark_person_step(list<Person*>& dark_warriors, list<Person*>& light_warriors, int i) {
+void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors) {
 	int idx = 0;
-	idx = get_idx_dark(dark_warriors.find_value(i));
-	if (idx == 1)
-		dynamic_cast<Monster_base*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
-	else if (idx == 2)
-		dynamic_cast<Monster_boss*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
-	else if (idx == 3)
-		dynamic_cast<Monster_base_better*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
-	check_person_hp(light_warriors);
-	if (light_warriors.size() != 0) {
-		cout << underline << "\nПротивники:\n" << no_underline;
+	for (int i = 0; i < dark_warriors.size(); i++) {
 		print(light_warriors);
+		idx = get_idx_dark(dark_warriors.find_value(i));
+		if (idx == 1)
+			dynamic_cast<Monster_base*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
+		else if (idx == 2)
+			dynamic_cast<Monster_boss*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
+		else if (idx == 3)
+			dynamic_cast<Monster_base_better*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
+		check_person_hp(light_warriors);
 	}
-	
 }
 
-void light_person_step(list<Person*>& dark_warriors, list<Person*>& light_warriors, int i) {
+void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors) {
 	int idx = 0;
-	idx = get_idx_light(light_warriors.find_value(i));
-	if (idx == 1)
-		dynamic_cast<Wizard*>(light_warriors.find_value(i))->choose_ability(dark_warriors, light_warriors);
-	else if (idx == 2)
-		dynamic_cast<Warrior*>(light_warriors.find_value(i))->choose_ability(dark_warriors, light_warriors);
-	else if (idx == 3)
-		dynamic_cast<Archer*>(light_warriors.find_value(i))->choose_ability(dark_warriors);
-	check_person_hp(dark_warriors);
-	if (dark_warriors.size() != 0) {
-		cout << underline << "\nПротивники:\n" << no_underline;
+	for (int i = 0; i < light_warriors.size(); i++) {
 		print(dark_warriors);
+		idx = get_idx_light(light_warriors.find_value(i));
+		if (idx == 1)
+			dynamic_cast<Wizard*>(light_warriors.find_value(i))->choose_ability(dark_warriors, light_warriors);
+		else if (idx == 2)
+			dynamic_cast<Warrior*>(light_warriors.find_value(i))->choose_ability(dark_warriors, light_warriors);
+		else if (idx == 3)
+			dynamic_cast<Archer*>(light_warriors.find_value(i))->choose_ability(dark_warriors);
+		check_person_hp(dark_warriors);
 	}
-	
 }
 
 void check_person_hp(list<Person*>& heroes) {
