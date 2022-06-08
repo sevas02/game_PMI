@@ -2,6 +2,20 @@
 #include "Person.h"
 using namespace std;
 
+void Person::app_time_bleed(int app_time_bleed) {
+	SetColor(4, 0);
+	cout << _name << " получил кровотечение на " << app_time_bleed << " хода" << "\n";
+	SetColor(7, 0);
+	_time_bleed += app_time_bleed; 
+}
+
+void Person::app_time_poison(int app_time_poison) {
+	SetColor(10, 0);
+	cout << _name << " получил отравление на " << app_time_poison << " хода" << "\n";
+	SetColor(7, 0);
+	_time_poison += app_time_poison; 
+}
+
 //функция увелечения маны после удара
 void Person::rise_mana(Person* enemy) {
 	if (enemy->hp() <= 0) {
@@ -24,7 +38,7 @@ void Person::deal_dmg(Person* enemy, int dmg) {
 //функция нанесения урона ядом
 void Person::rec_poison_dmg() {
 	if (_time_poison != 0) {
-		_hp -= 5;
+		_hp -= 10;
 		_time_poison--;
 	}
 }

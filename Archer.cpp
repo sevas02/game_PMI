@@ -33,8 +33,8 @@ void Archer::super_arrow_shot(Person* enemy) {
 	null_mana();
 
 	//супервысрел дает последствия (кровотечение противника)
-	//enemy.app_time_bleed(2);
-	//enemy.rec_bleed_dmg();
+	enemy->app_time_bleed(2);
+	enemy->rec_bleed_dmg();
 }
 
 //град стрел (удар по всем противникам)

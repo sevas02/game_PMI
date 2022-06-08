@@ -38,8 +38,8 @@ public:
 	void Set_time_poison(int time_poison) { _time_poison = time_poison; }
 
 	//Функции для добавления ходов к значениям отравления и кровотечения
-	void app_time_bleed(int app_time_bleed) { _time_bleed += app_time_bleed; }
-	void app_time_poison(int app_time_poison) { _time_poison += app_time_poison; }
+	void app_time_bleed(int app_time_bleed);
+	void app_time_poison(int app_time_poison);
 
 	//пополнение маны
 	void rise_mana(Person* enemy);

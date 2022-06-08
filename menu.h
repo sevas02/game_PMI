@@ -29,4 +29,10 @@ void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warri
 //проверка живой ли персонаж
 void check_person_hp(list<Person*>& heroes);
 
+//проверка персонажей на кровотечение
+void check_person_time_bleed(list<Person*>& heroes);
+
+//проверка персонажей на отравление
+void check_person_time_poison(list<Person*>& heroes);
+
 #endif

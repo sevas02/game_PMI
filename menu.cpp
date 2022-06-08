@@ -117,6 +117,8 @@ void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warrio
 			dynamic_cast<Monster_base_better*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
 		check_person_hp(light_warriors);
 	}
+	check_person_time_poison(dark_warriors);
+	check_person_time_bleed(dark_warriors);
 }
 
 void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors) {
@@ -132,6 +134,8 @@ void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warri
 			dynamic_cast<Archer*>(light_warriors.find_value(i))->choose_ability(dark_warriors);
 		check_person_hp(dark_warriors);
 	}
+	check_person_time_poison(light_warriors);
+	check_person_time_bleed(light_warriors);
 }
 
 void check_person_hp(list<Person*>& heroes) {
@@ -145,6 +149,32 @@ void check_person_hp(list<Person*>& heroes) {
 		}
 	}
 }
+
+//проверка персонажей на кровотечение
+void check_person_time_bleed(list<Person*>& heroes) {
+	for (int i = 0; i < heroes.size(); i++)
+		if (heroes.find_value(i)->time_bleed() > 0) {
+			heroes.find_value(i)->rec_bleed_dmg();
+			//светлокрасный цвет
+			SetColor(4, 0);
+			cout<< heroes.find_value(i)->name() << " теряет 5 hp от кровотечения" << "\n";
+			SetColor(7, 0);
+		}
+}
+
+//проверка персонажей на отравление
+void check_person_time_poison(list<Person*>& heroes) {
+	for (int i = 0; i < heroes.size(); i++)
+		if (heroes.find_value(i)->time_poison() > 0) {
+			heroes.find_value(i)->rec_bleed_dmg();
+			//светлозеленый цвет
+			SetColor(10, 0);
+			cout << heroes.find_value(i)->name() << " теряет 5 hp от отравления" << "\n";
+			SetColor(7, 0);
+		}
+}
+
+
 
 
 
