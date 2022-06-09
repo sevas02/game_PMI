@@ -31,42 +31,42 @@ int main(int argc, char** argv) {
 	myinit();
 	glutMainLoop();
 
-	int idx = 0;
-	int num_heroes, num_evils;
-	//PlaySound(MAKEINTRESOURCE(IDR_WAVE1), NULL, SND_RESOURCE | SND_ASYNC);
-	SetConsoleCP(65001);
-	SetConsoleOutputCP(65001);
-	list<Person*> light_warriors;
-	list<Person*> dark_warriors;
-	cout << underline << "Введите количество героев:" << no_underline << "\n";
-	num_heroes = heroes_num();
-	choose_light_person(light_warriors, num_heroes);
-	cout << underline << "Введите количество злодеев:" << no_underline << "\n";
-	num_evils = heroes_num();
-	choose_dark_person(dark_warriors, num_evils);
-	while (dark_warriors.size() != 0 && light_warriors.size() != 0) {
-		SetColor(8, 0);
-		cout << "Ход светлых сил!\n";
-		SetColor(7, 0);
-		light_persons_step(dark_warriors, light_warriors);
-		SetColor(2, 0);
-		cout << "Ход тёмных сил!\n";
-		SetColor(7, 0);
-		dark_persons_step(dark_warriors, light_warriors);
-	}
+	//int idx = 0;
+	//int num_heroes, num_evils;
+	////PlaySound(MAKEINTRESOURCE(IDR_WAVE1), NULL, SND_RESOURCE | SND_ASYNC);
+	//SetConsoleCP(65001);
+	//SetConsoleOutputCP(65001);
+	//list<Person*> light_warriors;
+	//list<Person*> dark_warriors;
+	//cout << underline << "Введите количество героев:" << no_underline << "\n";
+	//num_heroes = heroes_num();
+	//choose_light_person(light_warriors, num_heroes);
+	//cout << underline << "Введите количество злодеев:" << no_underline << "\n";
+	//num_evils = heroes_num();
+	//choose_dark_person(dark_warriors, num_evils);
+	//while (dark_warriors.size() != 0 && light_warriors.size() != 0) {
+	//	SetColor(8, 0);
+	//	cout << "Ход светлых сил!\n";
+	//	SetColor(7, 0);
+	//	light_persons_step(dark_warriors, light_warriors);
+	//	SetColor(2, 0);
+	//	cout << "Ход тёмных сил!\n";
+	//	SetColor(7, 0);
+	//	dark_persons_step(dark_warriors, light_warriors);
+	//}
 
-	if (dark_warriors.size() != 0) {
-		//желтый цвет
-		SetColor(6, 0);
-		cout << "Победила команда любителей тёмного пива!";
-		SetColor(7, 0);
-	}
-	else {
-		//тёмнокрасный цвет
-		SetColor(4, 0);
-		cout << "Победила команда любителей светлого пива!";
-		SetColor(7, 0);
-	}
+	//if (dark_warriors.size() != 0) {
+	//	//желтый цвет
+	//	SetColor(6, 0);
+	//	cout << "Победила команда любителей тёмного пива!";
+	//	SetColor(7, 0);
+	//}
+	//else {
+	//	//тёмнокрасный цвет
+	//	SetColor(4, 0);
+	//	cout << "Победила команда любителей светлого пива!";
+	//	SetColor(7, 0);
+	//}
 	
 	return 0;
 } 

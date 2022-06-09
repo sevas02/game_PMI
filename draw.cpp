@@ -15,11 +15,12 @@ GLint Width = 600, Height = 600;
 const int R = 30; // радиус окружности и круга
 const int N = 600;
 
+
+
 //функция перерисовки hp 
 void changes_hp(Person& pers, int side, int del, int j) {
 	double proc = pers.hp();
 	proc /= pers.max_hp();
-	cout << proc << "   NAME   " << pers.name() << "\n";
 	glBegin(GL_POLYGON);
 	glColor3f(0.0f, 0.0f, 0.0f);//прямоугольник
 	glVertex3f(side * Width / 6 - 2 * R, (2 * j + 1) * Height / del + 2 * R, 0);
@@ -39,8 +40,10 @@ void draw_side(list<Person*>& persons, int side, int num_heroes) {
 		glBegin(GL_TRIANGLE_FAN);
 		if (side == 1)
 			glColor3f(51.0f / 255.0f, 0.0f / 255.0f, 153.0f / 255.0f);//Blue
-		else
+		else if (side == 5)
 			glColor3f(255.0f / 255.0f, 51.0f / 255.0f, 51.0f / 255.0f);//Red
+		else 
+			glColor3f(1.0, 0.0, 1.0); //пурпурный
 		for (int i = 1; i <= N; i++) {
 			glVertex2f(side * Width / 6 + R * cos(2 * 3.14 / N * i), (2 * j + 1) * Height / del + R * sin(2 * 3.14 / N * i));
 		}
@@ -55,6 +58,8 @@ void draw_side(list<Person*>& persons, int side, int num_heroes) {
 		}
 
 	}
+	glColor3ub(255, 0, 0);
+	glutPostRedisplay();
 	glutSwapBuffers();
 	glFlush();
 }
@@ -64,16 +69,10 @@ void display() {
 	SetConsoleOutputCP(65001);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(1.0, 1.0, 1.0);
 
 	list<Person*> light_warriors;
 	list<Person*> dark_warriors;
 	int num_heroes, num_evils;
-
-	Person pers;
-	int proc = pers.hp();
-	proc /= pers.max_hp();
 
 	//Левая сторона
 	cout << underline << "Введите количество героев:" << no_underline << "\n";
@@ -93,23 +92,48 @@ void display() {
 	//рисуем правую сторону
 	draw_side(dark_warriors, side, num_evils);
 
-
+	glClear(GL_COLOR_BUFFER_BIT);
 	//бой
 	while (dark_warriors.size() != 0 && light_warriors.size() != 0) {
+
 		SetColor(8, 0);
 		cout << "Ход светлых сил!\n";
 		SetColor(7, 0);
+		if (light_warriors.size() == 0)
+			break;
 		light_persons_step(dark_warriors, light_warriors);
-		choose_dark_person(dark_warriors, num_evils);
+	
+		glClear(GL_COLOR_BUFFER_BIT);
+		draw_side(light_warriors, 1, num_heroes);
+		draw_side(dark_warriors, 5, num_evils);
+		
 		SetColor(2, 0);
 		cout << "Ход тёмных сил!\n";
 		SetColor(7, 0);
+		if (dark_warriors.size() == 0)
+			break;
 		dark_persons_step(dark_warriors, light_warriors);
-		choose_light_person(light_warriors, num_heroes);
+		
+		glClear(GL_COLOR_BUFFER_BIT);
+		draw_side(light_warriors, 1, num_heroes);
+		draw_side(dark_warriors, 5, num_evils);
+
 		glutSwapBuffers();
 		glFlush();
 	}
 
+	if (dark_warriors.size() != 0) {
+		//желтый цвет
+		SetColor(6, 0);
+		cout << "Победила команда любителей тёмного пива!";
+		SetColor(7, 0);
+	}
+	else {
+		//тёмнокрасный цвет
+		SetColor(4, 0);
+		cout << "Победила команда любителей светлого пива!";
+		SetColor(7, 0);
+	}
 
 	glutSwapBuffers();
 	glFlush();
