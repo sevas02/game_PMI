@@ -8,7 +8,7 @@ using namespace std;
 Wizard::Wizard() {
 	_hp = 60;
 	_max_hp = 60;
-	_dmg = 25;
+	_dmg = 300;
 	_mana = 0;
 	_armor = 0;
 	_time_bleed = 0;

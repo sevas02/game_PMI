@@ -16,7 +16,7 @@ const int R = 30; // радиус окружности и круга
 const int N = 600;
 
 
-//функция приветствия
+
 void hello() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
@@ -76,57 +76,6 @@ void hello() {
 	glutSwapBuffers();
 	glFlush();
 }
-// функция выбора 
-void choice(list<Person*> persons) {
-	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(1.0, 1.0, 1.0);
-
-	glBegin(GL_POLYGON);
-	glColor3f(0.0f / 255.0f, 0.0f / 255.0f, 51.0f / 255.0f);//прямоугольник
-	glVertex3f(0, 0, 0);
-	glVertex3f(0, 600, 0);
-	glVertex3f(600, 600, 0);
-	glVertex3f(600, 600, 0);
-	glEnd();
-
-	glColor3f(1.0, 1.0, 1.0);
-	glRasterPos2i(Width / 6 + 25, 3 * Height / 4); //позиция текста
-	string s = "Choose the persons you want to play ";
-	for (int i = 0; i < s.size(); i++) {
-		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
-	}
-
-	glColor3f(0.0f / 255.0f, 0.0f / 255.0f, 51.0f / 255.0f);
-	glRasterPos2i(4.5 * Width / 6, 3 * Height / 4); //позиция текста
-	s = " for";
-	for (int i = 0; i < s.size(); i++) {
-		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
-	}
-
-	//сюда надо передавать список из 3 героев, чтобы выводить их имена
-	int num_heroes = 3;
-	for (int i = 0; i < num_heroes; i++) {
-		glBegin(GL_TRIANGLE_FAN);
-		glColor3f(51.0f / 255.0f, 0.0f / 255.0f, 153.0f / 255.0f); //Blue
-
-		for (int j = 1; j <= N; j++) {
-			glVertex2f(Width / 6 * (2 * i + 1) + R * cos(2 * 3.14 / N * j), Height / 2 + R * sin(2 * 3.14 / N * j));
-		}
-		glEnd();
-
-		glRasterPos2i(Width / 6 * (2 * i + 1) - R, Height / 2 - 1.5 * R); //позиция текста
-		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, char(i + 48 + 1));
-		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, '.');
-		
-		string s = persons.find_value(i)->name(); //вывод их имен (?)
-		for (int i = 0; i < s.size(); i++) {
-			glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
-		}
-
-	}
-	glutSwapBuffers();
-	glFlush();
-}
 
 //функция перерисовки hp 
 void changes_hp(Person& pers, int side, int del, int j) {
@@ -153,8 +102,6 @@ void draw_side(list<Person*>& persons, int side, int num_heroes) {
 			glColor3f(51.0f / 255.0f, 0.0f / 255.0f, 153.0f / 255.0f);//Blue
 		else if (side == 5)
 			glColor3f(255.0f / 255.0f, 51.0f / 255.0f, 51.0f / 255.0f);//Red
-		else
-			glColor3f(1.0, 0.0, 1.0); //пурпурный
 		for (int i = 1; i <= N; i++) {
 			glVertex2f(side * Width / 6 + R * cos(2 * 3.14 / N * i), (2 * j + 1) * Height / del + R * sin(2 * 3.14 / N * i));
 		}
@@ -180,18 +127,19 @@ void display() {
 	SetConsoleOutputCP(65001);
 
 	hello();
-	//system("pause");
-	list<Person*> light_warriors;
-	list<Person*> dark_warriors;
+	system("pause");
+
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
 
+
+	list<Person*> light_warriors;
+	list<Person*> dark_warriors;
 	int num_heroes, num_evils;
 
 	//Левая сторона
 	cout << underline << "Введите количество героев:" << no_underline << "\n";
 	num_heroes = heroes_num();
-	choice(light_warriors);
 	choose_light_person(light_warriors, num_heroes);
 	int side = 1; //или 5, если рисуем по правую сторону
 
@@ -201,7 +149,6 @@ void display() {
 	//Правая сторона
 	cout << underline << "Введите количество злодеев:" << no_underline << "\n";
 	num_evils = heroes_num();
-	choice(dark_warriors);
 	choose_dark_person(dark_warriors, num_evils);
 	side = 5; //или 1, если рисуем по левую сторону
 
@@ -218,7 +165,8 @@ void display() {
 		if (light_warriors.size() == 0)
 			break;
 		light_persons_step(dark_warriors, light_warriors);
-
+		if (dark_warriors.size() == 0)
+			break;
 		glClear(GL_COLOR_BUFFER_BIT);
 		draw_side(light_warriors, 1, num_heroes);
 		draw_side(dark_warriors, 5, num_evils);
@@ -226,10 +174,9 @@ void display() {
 		SetColor(2, 0);
 		cout << "Ход тёмных сил!\n";
 		SetColor(7, 0);
-		if (dark_warriors.size() == 0)
-			break;
 		dark_persons_step(dark_warriors, light_warriors);
-
+		if (light_warriors.size() == 0)
+			break;
 		glClear(GL_COLOR_BUFFER_BIT);
 		draw_side(light_warriors, 1, num_heroes);
 		draw_side(dark_warriors, 5, num_evils);
@@ -265,9 +212,5 @@ void myinit() {
 }
 
 void SpecKeyboard(int key, int x, int y) {
-#define ENTER '\013'
-
-	//if (key == ENTER)
-	//	choice(persons);
+	if (key == GLUT_KEY_RIGHT) glutHideWindow();
 }
-
