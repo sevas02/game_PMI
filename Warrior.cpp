@@ -14,7 +14,7 @@ Warrior::Warrior() {
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
-	_name = "Воин";
+	_name = "Warrior";
 }
 
 //Деструктор 

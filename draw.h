@@ -8,6 +8,4 @@ void myinit();
 
 void SpecKeyboard(int key, int x, int y);
 
-void TimerMove(int value);
 #endif DRAW_H
-

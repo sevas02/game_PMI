@@ -13,26 +13,27 @@
 #pragma comment (lib, "Winmm.lib")
 #define underline "\033[4m"
 #define no_underline "\033[0m"
-#define Width  1000
-#define Height 1000
+#define Width  600
+#define Height 600
 using namespace std;
 
 
 int main(int argc, char** argv) {
-	/*glutInit(&argc, argv);
+	PlaySound(MAKEINTRESOURCE(IDR_WAVE1), NULL, SND_RESOURCE | SND_ASYNC);
+	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(Width, Height);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("Game of the year");
 	glutDisplayFunc(display);
 	glutSpecialFunc(SpecKeyboard);
-	glutTimerFunc(33, TimerMove, 1);
+	//glutTimerFunc(33, TimerMove, 1);
 	myinit();
-	glutMainLoop();*/
+	glutMainLoop();
 
 	int idx = 0;
 	int num_heroes, num_evils;
-	PlaySound(MAKEINTRESOURCE(IDR_WAVE1), NULL, SND_RESOURCE | SND_ASYNC);
+	//PlaySound(MAKEINTRESOURCE(IDR_WAVE1), NULL, SND_RESOURCE | SND_ASYNC);
 	SetConsoleCP(65001);
 	SetConsoleOutputCP(65001);
 	list<Person*> light_warriors;
@@ -44,20 +45,26 @@ int main(int argc, char** argv) {
 	num_evils = heroes_num();
 	choose_dark_person(dark_warriors, num_evils);
 	while (dark_warriors.size() != 0 && light_warriors.size() != 0) {
-		dark_persons_step(dark_warriors, light_warriors);
+		SetColor(8, 0);
+		cout << "Ход светлых сил!\n";
+		SetColor(7, 0);
 		light_persons_step(dark_warriors, light_warriors);
+		SetColor(2, 0);
+		cout << "Ход тёмных сил!\n";
+		SetColor(7, 0);
+		dark_persons_step(dark_warriors, light_warriors);
 	}
 
 	if (dark_warriors.size() != 0) {
 		//желтый цвет
 		SetColor(6, 0);
-		cout << "Победила команда любителей тёмного пива";
+		cout << "Победила команда любителей тёмного пива!";
 		SetColor(7, 0);
 	}
 	else {
 		//тёмнокрасный цвет
 		SetColor(4, 0);
-		cout << "Победила команда любителей светлого пива";
+		cout << "Победила команда любителей светлого пива!";
 		SetColor(7, 0);
 	}
 	

@@ -16,7 +16,7 @@ Monster_base::Monster_base() {
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
-	_name = "Обычный монстр";
+	_name = "Zombie";
 }
 
 //функция атаки монстров
@@ -68,7 +68,7 @@ Monster_boss::Monster_boss() {
 	_armor = 1;
 	_time_bleed = 0;
 	_time_poison = 0;
-	_name = "БОРОВ";
+	_name = "BOSS";
 }
 
 //Супер атака босса монстра
@@ -125,7 +125,7 @@ Monster_base_better::Monster_base_better() {
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
-	_name = "Свин";
+	_name = "Toplyak";
 }
 
 //функция суперудара

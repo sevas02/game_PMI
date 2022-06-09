@@ -13,7 +13,7 @@ Archer::Archer() {
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
-	_name = "Лучник";
+	_name = "Archer";
 }
 
 //обычная атака
