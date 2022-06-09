@@ -17,6 +17,66 @@ const int N = 600;
 
 
 
+void hello() {
+	glClear(GL_COLOR_BUFFER_BIT);
+	glColor3f(1.0, 1.0, 1.0);
+
+	glColor3f(0.0, 0.0, 0.0);
+	glRasterPos2i(2 * Width / 6 + 25, 3 * Height / 4); //позиция текста
+	string s = "GAME OF THE YEAR";
+	for (int i = 0; i < s.size(); i++)
+		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
+
+	glRasterPos2i(2 * Width / 6 + 25, 3 * Height / 4); //позиция текста
+	s = "____ __ ___ ____";
+	for (int i = 0; i < s.size(); i++)
+		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
+
+	glRasterPos2i(Width / 6, 2 * Height / 4); //позиция текста
+	s = "~Nikita~ ~Motya~";
+	for (int i = 0; i < s.size(); i++)
+		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
+
+
+	glRasterPos2i(3.5 * Width / 6, 2 * Height / 4 ); //позиция текста
+	s = "~Sevas~ ~Lubas~";
+	for (int i = 0; i < s.size(); i++)
+		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
+
+	glRasterPos2i(3 * Width / 6 - 25, Height / 4); //позиция текста
+	s = "START";
+	for (int i = 0; i < s.size(); i++)
+		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
+
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(1.0, 1.0, 1.0);
+
+	int R = 20; // радиус окружности и круга
+	int N = 600;
+	for (int j = 1; j <= N; j++) {
+		glVertex2f(Width / 2 + R * cos(2 * 3.14 / N * j), Height / 3 + 30 + R * sin(2 * 3.14 / N * j));
+	}
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glColor3f(1.0, 1.0, 1.0);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, Height, 0);
+	glVertex3f(Width / 12, Height, 0);
+	glVertex3f(Width / 12, Height, 0);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glColor3f(1.0, 1.0, 1.0);
+	glVertex3f(Width, 0, 0);
+	glVertex3f(Width, Height, 0);
+	glVertex3f(Width - Width / 12, Height, 0);
+	glVertex3f(Width - Width / 12, Height, 0);
+	glEnd();
+	glutSwapBuffers();
+	glFlush();
+}
+
 //функция перерисовки hp 
 void changes_hp(Person& pers, int side, int del, int j) {
 	double proc = pers.hp();
@@ -42,8 +102,6 @@ void draw_side(list<Person*>& persons, int side, int num_heroes) {
 			glColor3f(51.0f / 255.0f, 0.0f / 255.0f, 153.0f / 255.0f);//Blue
 		else if (side == 5)
 			glColor3f(255.0f / 255.0f, 51.0f / 255.0f, 51.0f / 255.0f);//Red
-		else 
-			glColor3f(1.0, 0.0, 1.0); //пурпурный
 		for (int i = 1; i <= N; i++) {
 			glVertex2f(side * Width / 6 + R * cos(2 * 3.14 / N * i), (2 * j + 1) * Height / del + R * sin(2 * 3.14 / N * i));
 		}
@@ -67,8 +125,13 @@ void draw_side(list<Person*>& persons, int side, int num_heroes) {
 void display() {
 	SetConsoleCP(65001);
 	SetConsoleOutputCP(65001);
+
+	hello();
+	system("pause");
+
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
+
 
 	list<Person*> light_warriors;
 	list<Person*> dark_warriors;
