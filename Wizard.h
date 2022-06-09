@@ -1,4 +1,4 @@
-#ifndef WIZRAD
+#ifndef WIZARD
 #define WIZARD
 #include <vector>
 #include "Person.h"

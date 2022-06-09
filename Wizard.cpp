@@ -1,16 +1,19 @@
 #include "Wizard.h"
 #include "List.h"
+#include "menu.h"
+#define underline "\033[4m"
+#define no_underline "\033[0m"
 using namespace std;
 
 Wizard::Wizard() {
-	_hp = 120;
-	_max_hp = 120;
-	_dmg = 30;
+	_hp = 60;
+	_max_hp = 60;
+	_dmg = 50;
 	_mana = 0;
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
-	_name = "Маг";
+	_name = "Wizard";
 }
 
 void Wizard::super_healing(Person* kent) {
@@ -26,33 +29,37 @@ void Wizard::super_fire_punch(list<Person*>& enemies) {
 	//рандомим событие
 	int num = rand() % 10 + 1;
 	//рандомим врага
-	int idx = rand() % (enemies.size() - 1);
+	int idx = rand() % (enemies.size());
 	//урон при срабатывании пассивки (40% от базового)
-	int temp_dmg = val_fire_dmg * _dmg;
-	if (num <= 2) {
-		deal_dmg(enemies.find(idx), temp_dmg);
-		cout << "Нанесен урон противнику с номером " << idx << "у него осталось " << enemies.find(idx)->hp() << "хп" << endl;
-	}
-	else
-		cout << "Выпал номер " << num << endl;
-	null_mana();
+	int temp_dmg = val_fire_dmg * dmg();
+	if (num <= 2) 
+		deal_dmg(enemies.find_value(idx), temp_dmg);
 }
 
 void Wizard::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	int idx;
-	cout << "Выберите действие: 1 - обычная атака, 2 - лечение ";
-	cin >> idx;
+	cout << underline << "\nВы ходите за мага " <<
+		"| " << mana() << " ед. маны |\n" << no_underline;
+	cout << "Выберите действие:\n1.обычная атака\n2.лечение\n";
+	idx = check_idx(2);
 	if (idx == 1) {
-		cout << "Выберите противника " << "\n";
-		cin >> idx;
-		Person* enemy = enemies.find(idx - 1);
-		deal_dmg(enemy, _dmg);
+		cout << underline << "\nВыберите противника\n" << no_underline;
+		print(enemies);
+		idx = check_idx(enemies.size());;
+		Person* enemy = enemies.find_value(idx - 1);
+		deal_dmg(enemy, dmg());
 		super_fire_punch(enemies);
 	}
-	if (idx == 2) {
-		cout << "Выберите союзника " << "\n";
-		cin >> idx;
-		Person* kent = kents.find(idx - 1);
+	else if (idx == 2) {
+		if (mana() <= 10) {
+			cout << "Недостаточно маны! Повторите ввод!\n";
+			choose_ability(enemies, kents);
+			return;
+		}
+		cout << underline << "\nВыберите союзника\n" << no_underline;
+		print(kents);
+		idx = check_idx(kents.size());
+		Person* kent = kents.find_value(idx - 1);
 		super_healing(kent);
 	}
 }

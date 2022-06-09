@@ -2,6 +2,20 @@
 #include "Person.h"
 using namespace std;
 
+void Person::app_time_bleed(int app_time_bleed) {
+	SetColor(4, 0);
+	cout << _name << " получил кровотечение на " << app_time_bleed << " хода" << "\n";
+	SetColor(7, 0);
+	_time_bleed += app_time_bleed; 
+}
+
+void Person::app_time_poison(int app_time_poison) {
+	SetColor(10, 0);
+	cout << _name << " получил отравление на " << app_time_poison << " хода" << "\n";
+	SetColor(7, 0);
+	_time_poison += app_time_poison; 
+}
+
 //функция увелечения маны после удара
 void Person::rise_mana(Person* enemy) {
 	if (enemy->hp() <= 0) {
@@ -18,15 +32,13 @@ void Person::deal_dmg(Person* enemy, int dmg) {
 		enemy->Set_armor(0);
 	else
 		enemy->Set_hp(enemy->hp() - dmg);
-	if (enemy->hp() <= 0)
-		cout << "умер" << "\n";
 	rise_mana(enemy);
 }
 
 //функция нанесения урона ядом
 void Person::rec_poison_dmg() {
 	if (_time_poison != 0) {
-		_hp -= 5;
+		_hp -= 10;
 		_time_poison--;
 	}
 }
@@ -39,6 +51,13 @@ void Person::rec_bleed_dmg() {
 	}
 }
 
-ostream& operator<<(ostream& output, const Person& hero) {
-	return output << hero._name;
+void Person::operator =(Person& per) {
+	_hp = per._hp;
+	_max_hp = per._max_hp; 
+	_dmg = per._dmg; 
+	_mana = per._mana; 
+	_armor = per._armor; 
+	_time_bleed = per._time_bleed; 
+	_time_poison = per._time_poison; 
+	_name = per._name;
 }

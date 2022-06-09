@@ -5,6 +5,7 @@
 #include <ctime>
 #include <vector>
 #include "List.h"
+#include "Checkers.h"
 using namespace std;
 
 class Person {
@@ -37,8 +38,8 @@ public:
 	void Set_time_poison(int time_poison) { _time_poison = time_poison; }
 
 	//Функции для добавления ходов к значениям отравления и кровотечения
-	void app_time_bleed(int app_time_bleed) { _time_bleed += app_time_bleed; }
-	void app_time_poison(int app_time_poison) { _time_poison += app_time_poison; }
+	void app_time_bleed(int app_time_bleed);
+	void app_time_poison(int app_time_poison);
 
 	//пополнение маны
 	void rise_mana(Person* enemy);
@@ -67,8 +68,17 @@ public:
 	//функция определения атаки у юнита
 	virtual void choose_ability() { ; }
 
-	friend ostream& operator<<(ostream& output, const Person& hero);
+	friend ostream& operator<<(ostream& output, const Person& stud);
+
+	void operator=(Person& hero);
 };
+
+inline ostream& operator<<(ostream& output, const Person& hero) {
+	output << hero._name << "\n";
+	output << "Количество здоровья: " << hero._hp << "\n" <<
+		"Количество маны: " << hero._mana << "\n";
+	return output;
+}
 
 
 #endif

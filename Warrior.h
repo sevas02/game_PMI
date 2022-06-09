@@ -2,7 +2,6 @@
 #define WARRIOR
 #include "Person.h"
 #include <iostream>
-#include <stack>
 
 class Warrior : public Person {
 public:
@@ -22,8 +21,7 @@ public:
 	void Warrior_attack(Person& enemy);
 
 	// Функция выбора атаки
-	void choose_attack(list<Person*>& enemies);
+	void choose_ability(list<Person*>& enemies, list<Person*>& kents);
 };
-
 
 #endif//WARRIOR

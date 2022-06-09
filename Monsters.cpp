@@ -1,6 +1,10 @@
 #include "Monsters.h"
+#include "menu.h"
+#include "Checkers.h"
 #include <iostream>
 #include <Windows.h>
+#define underline "\033[4m"
+#define no_underline "\033[0m"
 using namespace std;
 
 //Конструктор для базового монстра
@@ -12,13 +16,13 @@ Monster_base::Monster_base() {
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
-	_name = "Порося";
+	_name = "Zombie";
 }
 
 //функция атаки монстров
 void Monster_base::Monster_attack(Person& enemy) {
 	srand(time(0));
-	deal_dmg(&enemy, _dmg);
+	deal_dmg(&enemy, dmg());
 	int num = 1 + rand() % 10;
 	//урон нанесется с 20% шансом
 	if (num <= 2) {
@@ -26,17 +30,18 @@ void Monster_base::Monster_attack(Person& enemy) {
 		enemy.app_time_poison(3);
 		enemy.rec_poison_dmg();
 	}
-	null_mana();
 }
 
 void Monster_base::choose_ability(list<Person*>& enemies) {
-	int idx;
-	cout << "Выберите действие: 1 - обычная атака ";
-	cin >> idx;
-	if (idx == 1) {
-		cout << "Выберите противника " << "\n";
-		cin >> idx;
-		Person* man = enemies.find(idx - 1);
+	int index;
+	cout << underline << "\nВы ходите за обычного монстра\n" << no_underline;
+	cout << "Выберите действие:\n1.обычная атака\n";
+	index = check_idx(1);
+	if (index == 1) {
+		cout << underline << "\nВыберите противника " << no_underline << "\n";
+		print(enemies);
+		index = check_idx(enemies.size());
+		Person* man = enemies.find_value(index - 1);
 		Monster_attack(*man);
 	}
 }
@@ -63,30 +68,39 @@ Monster_boss::Monster_boss() {
 	_armor = 1;
 	_time_bleed = 0;
 	_time_poison = 0;
-	_name = "БОРОВ";
+	_name = "BOSS";
 }
 
 //Супер атака босса монстра
 void Monster_boss::Monster_boss_sup_attack(list<Person*>& enemies) {
 	for (int i = 0; i < enemies.size(); i++) {
-		enemies.find(i)->app_time_poison(5);
-		enemies.find(i)->rec_poison_dmg();
+		enemies.find_value(i)->app_time_poison(5);
+		enemies.find_value(i)->rec_poison_dmg();
 	}
 	null_mana();
 }
 
-void Monster_boss::choose_ability(list<Person*>& enimies) {
-	int idx;
-	cout << "Выберите действие: 1 - обычная атака, 2 - супер-пупер ";
-	cin >> idx;
-	if (idx == 1) {
-		cout << "Выберите противника " << "\n";
-		cin >> idx;
-		Person* man = enimies.find(idx - 1);
+void Monster_boss::choose_ability(list<Person*>& enemies) {
+	int index;
+	cout << underline << "Вы ходите за монстра босса" << "| " << mana() <<
+	" ед. маны |\n" << no_underline;
+	cout << "Выберите действие:\n1.обычная атака\n2.супер-атака\n";
+	index = check_idx(2);
+	if (index == 1) {
+		cout << underline << "\nВыберите противника " << no_underline << "\n";
+		print(enemies);
+		index = check_idx(enemies.size());
+		Person* man = enemies.find_value(index - 1);
 		Monster_attack(*man);
 	}
-	else
-		Monster_boss_sup_attack(enimies);
+	else {
+		if (mana() <= 10) {
+			cout << "Недостаточно маны! Повторите ввод!\n";
+			choose_ability(enemies);
+			return;
+		}
+		Monster_boss_sup_attack(enemies);
+	}
 
 }
 
@@ -111,31 +125,40 @@ Monster_base_better::Monster_base_better() {
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
-	_name = "Свин";
+	_name = "Toplyak";
 }
 
 //функция суперудара
 void Monster_base_better::Monster_sup_attack(Person& enemy) {
-	deal_dmg(&enemy, _dmg / 2);
+	deal_dmg(&enemy, dmg() / 2);
 	//5 - число ходов
 	enemy.app_time_poison(5);
 	enemy.rec_poison_dmg();
 }
 
 void Monster_base_better::choose_ability(list<Person*>& enemies) {
-	int idx;
-	cout << "Выберите действие: 1 - обычная атака, 2 - супер-пупер ";
-	cin >> idx;
-	if (idx == 1) {
-		cout << "Выберите противника " << "\n";
-		cin >> idx;
-		Person* man = enemies.find(idx - 1);
+	int index;
+	cout << underline << "Вы ходите за улучшенного монстра" << "| " << mana() << 
+		" ед. маны |\n" << no_underline; no_underline;
+	cout << "\nВыберите действие:\n1.обычная атака\n2.супер-атака " <<"\n";
+	index = check_idx(2);
+	if (index == 1) {
+		cout << underline << "\nВыберите противника " << no_underline << "\n";
+		print(enemies);
+		index = check_idx(enemies.size());
+		Person* man = enemies.find_value(index - 1);
 		Monster_attack(*man);
 	}
 	else {
-		cout << "Выберите противника " << "\n";
-		cin >> idx;
-		Person* man = enemies.find(idx - 1);
+		if (mana() <= 10) {
+			cout << "Недостаточно маны! Повторите ввод!\n";
+			choose_ability(enemies);
+			return;
+		}
+		cout << underline << "\nВыберите противника " << no_underline << "\n";
+		print(enemies);
+		index = check_idx(enemies.size());
+		Person* man = enemies.find_value(index - 1);
 		Monster_sup_attack(*man);
 	}
 }
@@ -164,7 +187,7 @@ Monster_vampire::Monster_vampire() {
 }
 
 void Monster_vampire::vampire_attack(Person& enemy) {
-	deal_dmg(&enemy, _dmg / 2);
+	deal_dmg(&enemy, dmg() / 2);
 	//5 - число ходов
 	enemy.app_time_bleed(5);
 	enemy.rec_bleed_dmg();

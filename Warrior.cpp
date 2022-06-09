@@ -1,5 +1,8 @@
 #include "Warrior.h"
+#include "menu.h"
 #include "List.h"
+#define underline "\033[4m"
+#define no_underline "\033[0m"
 using namespace std;
 
 //Конструктор 
@@ -11,7 +14,7 @@ Warrior::Warrior() {
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
-	//_name = "Воин";
+	_name = "Warrior";
 }
 
 //Деструктор 
@@ -23,7 +26,7 @@ Warrior::~Warrior() {
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
-	//_name = "";
+	_name = "";
 }
 
 // дать бронь союзникам
@@ -34,7 +37,7 @@ void Warrior::give_shield(Person& ally) {
 // Cупер сила
 void Warrior::Warrior_super_attack() {
 	if (_mana < 50)
-		cout << "недостаточно маны" << endl;
+		cout << "недостаточно маны! " << endl;
 	else {
 		_hp += 30;
 		_dmg += 5;
@@ -56,17 +59,37 @@ void Warrior::Warrior_attack(Person& enemy) {
 	_mana += 10;
 }
 
-void Warrior::choose_attack(list<Person*>& enemies) {
+void Warrior::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	int idx;
-	cout << "Choose attack: 1 - Normal";
-	cin >> idx;
+	cout << underline << "\nВы ходите за воина " <<
+		"| " << mana() << " ед. маны |\n" << no_underline;
+	cout << "Выберите действие:\n1.обычная атака\n2.улучшение воина\n3.снарядить щитом воина" << "\n";
+	idx = check_idx(3);
 	if (idx == 1) {
-		cout << "Choose hero" << endl;
-		cin >> idx;
-		Person* man = enemies.find(idx - 1);
+		cout << underline << "\nВыберите противника " << no_underline << "\n";
+		print(enemies);
+		idx = check_idx(enemies.size());
+		Person* man = enemies.find_value(idx - 1);
 		Warrior_attack(*man);
 	}
-	else 
+	else if (idx == 2) {
+		if (mana() <= 5) {
+			cout << "Недостаточно маны! Повторите ввод!\n";
+			choose_ability(enemies, kents);
+			return;
+		}
 		Warrior_super_attack();
+	}
+	else if (idx == 3) {
+		if (mana() <= 10) {
+			cout << "Недостаточно маны! Повторите ввод!\n";
+			choose_ability(enemies, kents);
+			return;
+		}
+		cout << underline << "\nВыберите союзника " << no_underline << "\n";
+		print(kents);
+		idx = check_idx(enemies.size());
+		Person* man = kents.find_value(idx - 1);
+		give_shield(*man);
+	}
 }
-
