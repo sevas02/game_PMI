@@ -38,7 +38,7 @@ void hello() {
 		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
 
 
-	glRasterPos2i(3.5 * Width / 6, 2 * Height / 4 ); //позиция текста
+	glRasterPos2i(3 * Width / 6, 2 * Height / 4 - 200); //позиция текста
 	s = "~Sevas~ ~Lubas~";
 	for (int i = 0; i < s.size(); i++)
 		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
@@ -142,7 +142,7 @@ void display() {
 	num_heroes = heroes_num();
 	choose_light_person(light_warriors, num_heroes);
 	int side = 1; //или 5, если рисуем по правую сторону
-	
+
 	//рисуем левую сторону
 	draw_side(light_warriors, side, num_heroes);
 
@@ -165,18 +165,18 @@ void display() {
 		if (light_warriors.size() == 0)
 			break;
 		light_persons_step(dark_warriors, light_warriors);
-	
+		if (dark_warriors.size() == 0)
+			break;
 		glClear(GL_COLOR_BUFFER_BIT);
 		draw_side(light_warriors, 1, num_heroes);
 		draw_side(dark_warriors, 5, num_evils);
-		
+
 		SetColor(2, 0);
 		cout << "Ход тёмных сил!\n";
 		SetColor(7, 0);
-		if (dark_warriors.size() == 0)
-			break;
 		dark_persons_step(dark_warriors, light_warriors);
-		
+		if (light_warriors.size() == 0)
+			break;
 		glClear(GL_COLOR_BUFFER_BIT);
 		draw_side(light_warriors, 1, num_heroes);
 		draw_side(dark_warriors, 5, num_evils);
@@ -214,4 +214,3 @@ void myinit() {
 void SpecKeyboard(int key, int x, int y) {
 	if (key == GLUT_KEY_RIGHT) glutHideWindow();
 }
-
