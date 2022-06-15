@@ -10,6 +10,9 @@ public:
 	//конструктор стрелка
 	Archer();
 
+	//конструктор копирования
+	Archer(const Archer &arch);
+
 	//обычная атака
 	void simple_attack(Person* enemy);
 

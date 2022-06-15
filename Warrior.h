@@ -11,16 +11,16 @@ public:
 	//Деструктор
 	~Warrior();
 
-	// дать бронь союзникам
-	void give_shield(Person& ally);
+	//выдать броню союзникам
+	void give_shield(Person* kent);
 
-	// Cупер сила
+	//увеличение характеристик война
 	void Warrior_super_attack();
 
 	//Функция атаки 
-	void Warrior_attack(Person& enemy);
+	void Warrior_attack(Person* enemy);
 
-	// Функция выбора атаки
+	//Функция выбора атаки
 	void choose_ability(list<Person*>& enemies, list<Person*>& kents);
 };
 

@@ -8,12 +8,23 @@ using namespace std;
 Wizard::Wizard() {
 	_hp = 60;
 	_max_hp = 60;
-	_dmg = 300;
-	_mana = 100;
+	_dmg = 30;
+	_mana = 0;
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
 	_name = "Wizard";
+}
+
+Wizard::Wizard(const Wizard &wizrd) {
+	_hp = wizrd._hp;
+	_max_hp = wizrd._max_hp;
+	_dmg = wizrd._dmg;
+	_mana = wizrd._mana;
+	_armor = wizrd._armor;
+	_time_bleed = wizrd._time_bleed;
+	_time_poison = wizrd._time_poison;
+	_name = wizrd._name;
 }
 
 void Wizard::super_healing(Person* kent) {

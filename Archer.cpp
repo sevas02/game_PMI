@@ -4,32 +4,39 @@
 #define no_underline "\033[0m"
 using namespace std;
 
-//конструктор стрелка
 Archer::Archer() {
 	_hp = 80;
 	_max_hp = 80;
-	_dmg = 15;
-	_mana = 100;
+	_dmg = 20;
+	_mana = 0;
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
 	_name = "Archer";
 }
 
-//обычная атака
+Archer::Archer(const Archer &arch) {
+	_hp = arch._hp;
+	_max_hp = arch._max_hp;
+	_dmg = arch._dmg;
+	_mana = arch._mana;
+	_armor = arch._armor;
+	_time_bleed = arch._time_bleed;
+	_time_poison = arch._time_poison;
+	_name = arch._name;
+}
+
 void Archer::simple_attack(Person* enemy) {
-	srand(time(0));
 	deal_dmg(enemy, _dmg);
 }
 
-//супервыстрел стрелой с последующим кровотечением у противника
 void Archer::super_arrow_shot(Person* enemy) {
 
 	//урон от стрелы увеличивается
 	int temp_dmg = _dmg * 1.75;
 
 	deal_dmg(enemy, temp_dmg);
-	//обнуление только что потраченной маны
+
 	null_mana();
 
 	//супервысрел дает последствия (кровотечение противника)
@@ -37,7 +44,6 @@ void Archer::super_arrow_shot(Person* enemy) {
 	enemy->rec_bleed_dmg();
 }
 
-//град стрел (удар по всем противникам)
 void Archer::hail_of_arrows(list<Person*>& enemies) {
 
 	//урон от стрел чуть уменьшается
@@ -57,7 +63,6 @@ void Archer::hail_of_arrows(list<Person*>& enemies) {
 			enemies.find_value(i)->rec_poison_dmg();
 		}
 	}
-	//обнуление только что потраченной маны
 	null_mana();
 }
 
@@ -96,7 +101,6 @@ void Archer::choose_ability(list<Person*>& enemies) {
 	}
 }
 
-//деструктор стрелка
 Archer::~Archer() {
 	_hp = 0;
 	_max_hp = 0;

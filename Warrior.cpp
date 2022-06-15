@@ -5,19 +5,17 @@
 #define no_underline "\033[0m"
 using namespace std;
 
-//Конструктор 
 Warrior::Warrior() {
 	_hp = 100;
 	_max_hp = 100;
-	_dmg = 10;
-	_mana = 100;
+	_dmg = 15;
+	_mana = 0;
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
 	_name = "Warrior";
 }
 
-//Деструктор 
 Warrior::~Warrior() {
 	_hp = 0;
 	_max_hp = 0;
@@ -29,31 +27,25 @@ Warrior::~Warrior() {
 	_name = "";
 }
 
-// дать бронь союзникам
-void Warrior::give_shield(Person& ally) {
-	ally.Set_armor(true);
+void Warrior::give_shield(Person* kent) {
+	kent->Set_armor(true);
+	null_mana();
 }
 
-// Cупер сила
 void Warrior::Warrior_super_attack() {
-	if (_mana < 50)
-		cout << "недостаточно маны! " << endl;
-	else {
 		_hp += 30;
 		_dmg += 5;
 		null_mana();
-	}
 }
 
-//Функция атаки 
-void Warrior::Warrior_attack(Person& enemy) {
+void Warrior::Warrior_attack(Person* enemy) {
 	srand(time(0));
-	deal_dmg(&enemy, _dmg);
+	deal_dmg(enemy, _dmg);
 	int temp = 1 + rand() % 10;
 	// шанс нанести урон с кровотечением - 30%
 	if (temp <= 3) {
-		enemy.app_time_poison(2);
-		enemy.rec_bleed_dmg();
+		enemy->app_time_poison(2);
+		enemy->rec_bleed_dmg();
 		_mana += 5;
 	}
 	_mana += 10;
@@ -70,7 +62,7 @@ void Warrior::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 		print(enemies);
 		idx = check_idx(enemies.size());
 		Person* man = enemies.find_value(idx - 1);
-		Warrior_attack(*man);
+		Warrior_attack(man);
 	}
 	else if (idx == 2) {
 		if (mana() <= 5) {
@@ -90,6 +82,6 @@ void Warrior::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 		print(kents);
 		idx = check_idx(enemies.size());
 		Person* man = kents.find_value(idx - 1);
-		give_shield(*man);
+		give_shield(man);
 	}
 }
