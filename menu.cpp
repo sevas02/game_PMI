@@ -2,6 +2,7 @@
 #include "Checkers.h"
 #include "Motion.h"
 #include "Stack.h"
+#include "draw.h"
 #include <iostream>
 #define underline "\033[4m"
 #define no_underline "\033[0m"
@@ -109,6 +110,8 @@ void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warrio
 	int idx = 0, ans = 0;
 	motion step;
 	for (int i = 0; i < dark_warriors.size(); i++) {
+		if (light_warriors.size() == 0)
+			break;
 		step.copy_list2list(light_warriors, dark_warriors);
 		print(light_warriors);
 		idx = get_idx_dark(dark_warriors.find_value(i));
@@ -119,6 +122,9 @@ void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warrio
 		else if (idx == 3)
 			dynamic_cast<Monster_better*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
 		check_person_hp(light_warriors);
+		glClear(GL_COLOR_BUFFER_BIT);
+		draw_side(light_warriors, 1, light_warriors.size());
+		draw_side(dark_warriors, 5, dark_warriors.size());
 		cout << "Хотите вернуть обратно?" << "\n";
 		cin >> ans;
 		if (ans == 1) {
@@ -134,6 +140,8 @@ void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warrio
 void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors) {
 	int idx = 0;
 	for (int i = 0; i < light_warriors.size(); i++) {
+		if (dark_warriors.size() == 0)
+			break;
 		print(dark_warriors);
 		idx = get_idx_light(light_warriors.find_value(i));
 		if (idx == 1)
@@ -143,6 +151,9 @@ void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warri
 		else if (idx == 3)
 			dynamic_cast<Archer*>(light_warriors.find_value(i))->choose_ability(dark_warriors);
 		check_person_hp(dark_warriors);
+		glClear(GL_COLOR_BUFFER_BIT);
+		draw_side(light_warriors, 1, light_warriors.size());
+		draw_side(dark_warriors, 5, dark_warriors.size());
 	}
 	check_person_time_poison(light_warriors);
 	check_person_time_bleed(light_warriors);

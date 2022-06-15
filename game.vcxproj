@@ -129,6 +129,7 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="Monsters.h" />
+    <ClInclude Include="Motion.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stack_rollback.h" />
@@ -142,6 +143,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="Monsters.cpp" />
+    <ClCompile Include="Motion.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="Warrior.cpp" />
     <ClCompile Include="Wizard.cpp" />

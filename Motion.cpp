@@ -44,16 +44,21 @@ void motion::copy_dark_list2list(list<Person*>& dark_wars) {
 }
 
 void motion::copy_list2list(list<Person*>& light_wars, list<Person*>& dark_wars) {
-	for (int i = 0; i < _light_wars.size(); i++)
-		_light_wars.delete_front();
-	for (int i = 0; i < _dark_wars.size(); i++)
-		_dark_wars.delete_front();
+	int limit_d = dark_wars.size();
+	int limit_l = light_wars.size();
+	if (_light_wars.size() != 0)
+		for (int i = 0; i < limit_l; i++)
+			_light_wars.delete_front();
+	if (_dark_wars.size() != 0)
+		for (int i = 0; i < limit_d; i++)
+			_dark_wars.delete_front();
 	copy_dark_list2list(dark_wars);
 	copy_light_list2list(light_wars);
 }
 
 void motion::return_light_list2list(list<Person*>& light_wars) {
-	for (int i = 0; i < light_wars.size(); i++)
+	int limit = light_wars.size();
+	for (int i = 0; i < limit; i++)
 		light_wars.delete_front();
 	Wizard* mag = 0;
 	Warrior* war = 0;
@@ -75,7 +80,8 @@ void motion::return_light_list2list(list<Person*>& light_wars) {
 }
 
 void motion::return_dark_list2list(list<Person*>& dark_wars) {
-	for (int i = 0; i < dark_wars.size(); i++)
+	int limit = dark_wars.size();
+	for (int i = 0; i < limit; i++)
 		dark_wars.delete_front();
 	Monster_base* mag = 0;
 	Monster_boss* war = 0;
