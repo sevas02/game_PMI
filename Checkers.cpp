@@ -32,3 +32,4 @@ int check_idx(int max_num) {
 	}
 	return idx;
 }
+

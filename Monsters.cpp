@@ -23,6 +23,7 @@ Monster_base::Monster_base() {
 void Monster_base::Monster_attack(Person& enemy) {
 	srand(time(0));
 	deal_dmg(&enemy, dmg());
+	//прибавление 1 необходимо для нормального подсчета процентов
 	int num = 1 + rand() % 10;
 	//урон нанесется с 20% шансом
 	if (num <= 2) {
@@ -32,6 +33,7 @@ void Monster_base::Monster_attack(Person& enemy) {
 	}
 }
 
+//функция выбора атаки для обычного монстра
 void Monster_base::choose_ability(list<Person*>& enemies) {
 	int index;
 	cout << underline << "\nВы ходите за обычного монстра\n" << no_underline;
@@ -82,26 +84,32 @@ void Monster_boss::Monster_boss_sup_attack(list<Person*>& enemies) {
 
 void Monster_boss::choose_ability(list<Person*>& enemies) {
 	int index;
+	bool flag = 0;
+	Person* man = 0;
 	cout << underline << "Вы ходите за монстра босса" << "| " << mana() <<
 	" ед. маны |\n" << no_underline;
 	cout << "Выберите действие:\n1.обычная атака\n2.супер-атака\n";
-	index = check_idx(2);
-	if (index == 1) {
-		cout << underline << "\nВыберите противника " << no_underline << "\n";
-		print(enemies);
-		index = check_idx(enemies.size());
-		Person* man = enemies.find_value(index - 1);
-		Monster_attack(*man);
-	}
-	else {
-		if (mana() <= 10) {
-			cout << "Недостаточно маны! Повторите ввод!\n";
-			choose_ability(enemies);
-			return;
+	while (flag != 1) {
+		index = check_idx(2);
+		switch (index) {
+		case 1:
+			cout << underline << "\nВыберите противника " << no_underline << "\n";
+			print(enemies);
+			index = check_idx(enemies.size());
+			man = enemies.find_value(index - 1);
+			Monster_attack(*man);
+			flag = 1;
+			break;
+		case 2:
+			if (mana() <= 10) {
+				cout << "Недостаточно маны! Повторите ввод!\n";
+				break;
+			}
+			Monster_boss_sup_attack(enemies);
+			flag = 1;
+			break;
 		}
-		Monster_boss_sup_attack(enemies);
 	}
-
 }
 
 //Деструктор для монстра босса
@@ -117,7 +125,7 @@ Monster_boss::~Monster_boss() {
 }
 
 //конструктор для монстра (чуть лучше базового)
-Monster_base_better::Monster_base_better() {
+Monster_better::Monster_better() {
 	_hp = 120;
 	_max_hp = 120;
 	_dmg = 15;
@@ -129,74 +137,51 @@ Monster_base_better::Monster_base_better() {
 }
 
 //функция суперудара
-void Monster_base_better::Monster_sup_attack(Person& enemy) {
+void Monster_better::Monster_sup_attack(Person& enemy) {
+	//нанесенный урон уменьшается в два раза
 	deal_dmg(&enemy, dmg() / 2);
 	//5 - число ходов
 	enemy.app_time_poison(5);
 	enemy.rec_poison_dmg();
 }
 
-void Monster_base_better::choose_ability(list<Person*>& enemies) {
+//функция выбора способности для базового монстра
+void Monster_better::choose_ability(list<Person*>& enemies) {
 	int index;
+	bool flag = 0;
+	Person* man = 0;
 	cout << underline << "Вы ходите за улучшенного монстра" << "| " << mana() << 
 		" ед. маны |\n" << no_underline; no_underline;
 	cout << "\nВыберите действие:\n1.обычная атака\n2.супер-атака " <<"\n";
-	index = check_idx(2);
-	if (index == 1) {
-		cout << underline << "\nВыберите противника " << no_underline << "\n";
-		print(enemies);
-		index = check_idx(enemies.size());
-		Person* man = enemies.find_value(index - 1);
-		Monster_attack(*man);
-	}
-	else {
-		if (mana() <= 10) {
-			cout << "Недостаточно маны! Повторите ввод!\n";
-			choose_ability(enemies);
-			return;
+	while (flag != 1) {
+		index = check_idx(2);
+		switch (index) {
+		case 1:
+			cout << underline << "\nВыберите противника " << no_underline << "\n";
+			print(enemies);
+			index = check_idx(enemies.size());
+			man = enemies.find_value(index - 1);
+			Monster_attack(*man);
+			flag = 1;
+			break;
+		case 2:
+			if (mana() <= 10) {
+				cout << "Недостаточно маны! Повторите ввод!\n";
+				break;
+			}
+			cout << underline << "\nВыберите противника " << no_underline << "\n";
+			print(enemies);
+			index = check_idx(enemies.size());
+			man = enemies.find_value(index - 1);
+			Monster_sup_attack(*man);
+			flag = 1;
+			break;
 		}
-		cout << underline << "\nВыберите противника " << no_underline << "\n";
-		print(enemies);
-		index = check_idx(enemies.size());
-		Person* man = enemies.find_value(index - 1);
-		Monster_sup_attack(*man);
 	}
 }
 
 //деструктор для монстра (чуть лучше базового)
-Monster_base_better::~Monster_base_better() {
-	_hp = 0;
-	_max_hp = 0;
-	_dmg = 0;
-	_mana = 0;
-	_armor = 0;
-	_time_bleed = 0;
-	_time_poison = 0;
-	_name = "";
-}
-
-Monster_vampire::Monster_vampire() {
-	_hp = 60;
-	_max_hp = 60;
-	_dmg = 30;
-	_mana = 0;
-	_armor = 0;
-	_time_bleed = 0;
-	_time_poison = 0;
-	_name = "Вампир";
-}
-
-void Monster_vampire::vampire_attack(Person& enemy) {
-	deal_dmg(&enemy, dmg() / 2);
-	//5 - число ходов
-	enemy.app_time_bleed(5);
-	enemy.rec_bleed_dmg();
-	//в дальнейшем планируется сделать пополнение здоровья в течение игры а не сразу
-	_hp += 25;
-	null_mana();
-}
-
-Monster_vampire::~Monster_vampire() {
+Monster_better::~Monster_better() {
 	_hp = 0;
 	_max_hp = 0;
 	_dmg = 0;
