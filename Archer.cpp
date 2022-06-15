@@ -9,7 +9,7 @@ Archer::Archer() {
 	_hp = 80;
 	_max_hp = 80;
 	_dmg = 15;
-	_mana = 0;
+	_mana = 100;
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;

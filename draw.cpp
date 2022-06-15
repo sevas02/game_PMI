@@ -144,7 +144,7 @@ void display() {
 	int side = 1; //или 5, если рисуем по правую сторону
 
 	//рисуем левую сторону
-	draw_side(light_warriors, side, num_heroes);
+	draw_side(light_warriors, side, light_warriors.size());
 
 	//Правая сторона
 	cout << underline << "Введите количество злодеев:" << no_underline << "\n";
@@ -153,7 +153,7 @@ void display() {
 	side = 5; //или 1, если рисуем по левую сторону
 
 	//рисуем правую сторону
-	draw_side(dark_warriors, side, num_evils);
+	draw_side(dark_warriors, side, dark_warriors.size());
 
 	glClear(GL_COLOR_BUFFER_BIT);
 	//бой
@@ -168,8 +168,8 @@ void display() {
 		if (dark_warriors.size() == 0)
 			break;
 		glClear(GL_COLOR_BUFFER_BIT);
-		draw_side(light_warriors, 1, num_heroes);
-		draw_side(dark_warriors, 5, num_evils);
+		draw_side(light_warriors, 1, light_warriors.size());
+		draw_side(dark_warriors, 5, dark_warriors.size());
 
 		SetColor(2, 0);
 		cout << "Ход тёмных сил!\n";
@@ -178,20 +178,20 @@ void display() {
 		if (light_warriors.size() == 0)
 			break;
 		glClear(GL_COLOR_BUFFER_BIT);
-		draw_side(light_warriors, 1, num_heroes);
-		draw_side(dark_warriors, 5, num_evils);
+		draw_side(light_warriors, 1, light_warriors.size());
+		draw_side(dark_warriors, 5, dark_warriors.size());
 
 		glutSwapBuffers();
 		glFlush();
 	}
-
+	cout << dark_warriors.size();
 	if (dark_warriors.size() != 0) {
 		//желтый цвет
 		SetColor(6, 0);
 		cout << "Победила команда любителей тёмного пива!";
 		SetColor(7, 0);
 	}
-	else {
+	else if (light_warriors.size() != 0) {
 		//тёмнокрасный цвет
 		SetColor(4, 0);
 		cout << "Победила команда любителей светлого пива!";

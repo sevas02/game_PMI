@@ -3,7 +3,6 @@
 #include <iostream>
 #define underline "\033[4m"
 #define no_underline "\033[0m"
-
 using namespace std;
 
 void print(list<Person*>& list) {
@@ -51,7 +50,7 @@ void choose_light_person(list<Person*>& light_warriors, int num) {
 void choose_dark_person(list<Person*>& dark_warriors, int num) {
 	int monster_num, index = 0;
 	Monster_base* m_b;
-	Monster_base_better* m_b_b;
+	Monster_better* m_b_b;
 	Monster_boss* m_boss;
 	cout << underline << "\nВыберите темного персонажа:" << no_underline << "\n";
 	cout << "1.Обычный монстр\n2.Улучшенный монстр\n3.Босс" << '\n';
@@ -66,7 +65,7 @@ void choose_dark_person(list<Person*>& dark_warriors, int num) {
 		break;
 
 		case 2:
-		m_b_b = new Monster_base_better();
+		m_b_b = new Monster_better();
 		dark_warriors.push_front(m_b_b);
 		index++;
 		break;
@@ -87,7 +86,7 @@ int get_idx_dark(Person* hero) {
 		return 1;
 	else if (typeid(*hero) == typeid(Monster_boss))
 		return 2;
-	else if (typeid(*hero) == typeid(Monster_base_better))
+	else if (typeid(*hero) == typeid(Monster_better))
 		return 3;
 	else
 		return -1;
@@ -114,7 +113,7 @@ void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warrio
 		else if (idx == 2)
 			dynamic_cast<Monster_boss*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
 		else if (idx == 3)
-			dynamic_cast<Monster_base_better*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
+			dynamic_cast<Monster_better*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
 		check_person_hp(light_warriors);
 	}
 	check_person_time_poison(dark_warriors);

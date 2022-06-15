@@ -42,9 +42,9 @@ public:
 //Улучшенный монстр
 //Увеличенное здоровье
 //Супер удар - гаранитрованное отравление героя и нанесение ему урона 
-class Monster_base_better : public Monster_base {
+class Monster_better : public Monster_base {
 public:
-	Monster_base_better();
+	Monster_better();
 
 	//функция супер атаки для монстра
 	void Monster_sup_attack(Person& enemy);
@@ -52,19 +52,7 @@ public:
 	//функция выбора атаки
 	void choose_ability(list<Person*>& enemies);
 
-	~Monster_base_better();
-};
-
-//Вампир
-//Мало здоровья, много урона
-//Супер удар - высасывание крови у оппонента
-class Monster_vampire : public Monster_base {
-public:
-	Monster_vampire();
-
-	void vampire_attack(Person& enemy);
-
-	~Monster_vampire();
+	~Monster_better();
 };
 
 #endif
