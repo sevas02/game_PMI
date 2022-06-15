@@ -38,7 +38,7 @@ void hello() {
 		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
 
 
-	glRasterPos2i(3 * Width / 6, 2 * Height / 4 - 200); //позиция текста
+	glRasterPos2i(3.5 * Width / 6, 2 * Height / 4); //позиция текста
 	s = "~Sevas~ ~Lubas~";
 	for (int i = 0; i < s.size(); i++)
 		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
@@ -85,8 +85,8 @@ void changes_hp(Person& pers, int side, int del, int j) {
 	glColor3f(0.0f, 0.0f, 0.0f);//прямоугольник
 	glVertex3f(side * Width / 6 - 2 * R, (2 * j + 1) * Height / del + 2 * R, 0);
 	glVertex3f(side * Width / 6 - 2 * R, (2 * j + 1) * Height / del + 3 * R / 2, 0);
-	glVertex3f(side * Width / 6 + 2 * R * proc, (2 * j + 1) * Height / del + 3 * R / 2, 0);
-	glVertex3f(side * Width / 6 + 2 * R * proc, (2 * j + 1) * Height / del + 2 * R, 0);
+	glVertex3f(side * Width / 6 - 2 * R + 4 * R * proc, (2 * j + 1) * Height / del + 3 * R / 2, 0);
+	glVertex3f(side * Width / 6 - 2 * R + 4 * R * proc, (2 * j + 1) * Height / del + 2 * R, 0);
 	glEnd();
 }
 
@@ -162,10 +162,10 @@ void display() {
 		SetColor(8, 0);
 		cout << "Ход светлых сил!\n";
 		SetColor(7, 0);
-		if (light_warriors.size() == 0)
+		if (light_warriors.size() == 0 || dark_warriors.size() == 0)
 			break;
 		light_persons_step(dark_warriors, light_warriors);
-		if (dark_warriors.size() == 0)
+		if (dark_warriors.size() == 0 || light_warriors.size() == 0)
 			break;
 		glClear(GL_COLOR_BUFFER_BIT);
 		draw_side(light_warriors, 1, light_warriors.size());
@@ -175,7 +175,7 @@ void display() {
 		cout << "Ход тёмных сил!\n";
 		SetColor(7, 0);
 		dark_persons_step(dark_warriors, light_warriors);
-		if (light_warriors.size() == 0)
+		if (dark_warriors.size() == 0 || light_warriors.size() == 0)
 			break;
 		glClear(GL_COLOR_BUFFER_BIT);
 		draw_side(light_warriors, 1, light_warriors.size());
@@ -184,7 +184,6 @@ void display() {
 		glutSwapBuffers();
 		glFlush();
 	}
-	cout << dark_warriors.size();
 	if (dark_warriors.size() != 0) {
 		//желтый цвет
 		SetColor(6, 0);
