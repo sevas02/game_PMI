@@ -1,5 +1,7 @@
 #include "menu.h"
 #include "Checkers.h"
+#include "Motion.h"
+#include "Stack.h"
 #include <iostream>
 #define underline "\033[4m"
 #define no_underline "\033[0m"
@@ -104,8 +106,10 @@ int get_idx_light(Person* hero) {
 }
 
 void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors) {
-	int idx = 0;
+	int idx = 0, ans = 0;
+	motion step;
 	for (int i = 0; i < dark_warriors.size(); i++) {
+		step.copy_list2list(light_warriors, dark_warriors);
 		print(light_warriors);
 		idx = get_idx_dark(dark_warriors.find_value(i));
 		if (idx == 1)
@@ -115,6 +119,13 @@ void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warrio
 		else if (idx == 3)
 			dynamic_cast<Monster_better*>(dark_warriors.find_value(i))->choose_ability(light_warriors);
 		check_person_hp(light_warriors);
+		cout << "Хотите вернуть обратно?" << "\n";
+		cin >> ans;
+		if (ans == 1) {
+			step.return_dark_list2list(dark_warriors);
+			step.return_light_list2list(light_warriors);
+			i--;
+		}
 	}
 	check_person_time_poison(dark_warriors);
 	check_person_time_bleed(dark_warriors);
@@ -172,10 +183,3 @@ void check_person_time_poison(list<Person*>& heroes) {
 			SetColor(7, 0);
 		}
 }
-
-
-
-
-
-
-

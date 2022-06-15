@@ -17,15 +17,15 @@ Warrior::Warrior() {
 }
 
 
-Warrior::Warrior(const Warrior& war) {
-	_hp = war._hp;
-	_max_hp = war._max_hp;
-	_dmg = war._dmg;
-	_mana = war._mana;
-	_armor = war._armor;
-	_time_bleed = war._time_bleed;
-	_time_poison = war._time_poison;
-	_name = war._name;
+Warrior::Warrior(Person& war) {
+	_hp = war.hp();
+	_max_hp = war.max_hp();
+	_dmg = war.dmg();
+	_mana = war.mana();
+	_armor = war.armor();
+	_time_bleed = war.time_bleed();
+	_time_poison = war.time_poison();
+	_name = war.name();
 }
 
 Warrior::~Warrior() {

@@ -9,7 +9,7 @@ public:
 	Warrior();
 
 	//Конструктор копирования
-	Warrior(const Warrior& object);
+	Warrior(Person& object);
 
 	//Деструктор
 	~Warrior();

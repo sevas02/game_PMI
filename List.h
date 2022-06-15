@@ -70,10 +70,19 @@ node<T>* list<T>::create_node(T info) {
 template <class T> 
 void list<T>::push_front(T value) {
 	node<T>* new_el = create_node(value);
-	new_el->_next = _first;
-	if (_first != 0)
+	if (_size == 0) {
+		_first = new_el;
+		_last = _first;
+		_size++;
+		return;
+	}
+	if (_first != 0) {
+		new_el->_next = _first;
 		_first->_prev = new_el;
-	_first = new_el;
+		_first = new_el;
+		_size++;
+		return;
+	}
 	if (_last == 0)
 		_last = new_el;
 	_size++;
@@ -82,20 +91,28 @@ void list<T>::push_front(T value) {
 template <class T> 
 void list<T>::push_back(T value) {
 	node<T>* new_el = create_node(value);
-	new_el->_prev = _last;
-	if (_last != 0)
-		_last->_next = new_el;
-	_last = new_el;
-	if (_first == 0)
+	if (_size == 0) {
 		_first = new_el;
+		_last = _first;
+		_size++;
+		return;
+	}
+	if (_last != 0) {
+		new_el->_prev = _last;
+		_last->_next = new_el;
+		_last = _last->_next;
+		_size++;
+		return;
+	}
+	if (_last == 0)
+		_last = new_el;
 	_size++;
 }
 
 template <class T> 
 void list<T>::delete_last() {
 	node<T>* new_elem = _last;
-	_last->_prev = _last;
-	_last->_next = 0;
+	_last = _last->_prev;
 	delete new_elem;
 	_size--;
 }
@@ -103,8 +120,7 @@ void list<T>::delete_last() {
 template <class T> 
 void list<T>::delete_front() {
 	node<T>* new_elem = _first;
-	_last->_next = _first;
-	_first->_prev = 0;
+	_first = _first->_next;
 	delete new_elem;
 	_size--; 
 }

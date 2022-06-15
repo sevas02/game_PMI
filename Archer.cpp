@@ -15,15 +15,15 @@ Archer::Archer() {
 	_name = "Archer";
 }
 
-Archer::Archer(const Archer &arch) {
-	_hp = arch._hp;
-	_max_hp = arch._max_hp;
-	_dmg = arch._dmg;
-	_mana = arch._mana;
-	_armor = arch._armor;
-	_time_bleed = arch._time_bleed;
-	_time_poison = arch._time_poison;
-	_name = arch._name;
+Archer::Archer(Person &arch) {
+	_hp = arch.hp();
+	_max_hp = arch.max_hp();
+	_dmg = arch.dmg();
+	_mana = arch.mana();
+	_armor = arch.armor();
+	_time_bleed = arch.time_bleed();
+	_time_poison = arch.time_poison();
+	_name = arch.name();
 }
 
 void Archer::simple_attack(Person* enemy) {

@@ -16,15 +16,15 @@ Wizard::Wizard() {
 	_name = "Wizard";
 }
 
-Wizard::Wizard(const Wizard &wizrd) {
-	_hp = wizrd._hp;
-	_max_hp = wizrd._max_hp;
-	_dmg = wizrd._dmg;
-	_mana = wizrd._mana;
-	_armor = wizrd._armor;
-	_time_bleed = wizrd._time_bleed;
-	_time_poison = wizrd._time_poison;
-	_name = wizrd._name;
+Wizard::Wizard(Person& wizrd) {
+	_hp = wizrd.hp();
+	_max_hp = wizrd.max_hp();
+	_dmg = wizrd.dmg();
+	_mana = wizrd.mana();
+	_armor = wizrd.armor();
+	_time_bleed = wizrd.time_bleed();
+	_time_poison = wizrd.time_poison();
+	_name = wizrd.name();
 }
 
 void Wizard::super_healing(Person* kent) {

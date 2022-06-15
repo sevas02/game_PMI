@@ -19,6 +19,17 @@ Monster_base::Monster_base() {
 	_name = "Zombie";
 }
 
+Monster_base::Monster_base(Person& war) {
+	_hp = war.hp();
+	_max_hp = war.max_hp();
+	_dmg = war.dmg();
+	_mana = war.mana();
+	_armor = war.armor();
+	_time_bleed = war.time_bleed();
+	_time_poison = war.time_poison();
+	_name = war.name();
+}
+
 //функция атаки монстров
 void Monster_base::Monster_attack(Person& enemy) {
 	srand(time(0));
@@ -71,6 +82,17 @@ Monster_boss::Monster_boss() {
 	_time_bleed = 0;
 	_time_poison = 0;
 	_name = "BOSS";
+}
+
+Monster_boss::Monster_boss(Person& war) {
+	_hp = war.hp();
+	_max_hp = war.max_hp();
+	_dmg = war.dmg();
+	_mana = war.mana();
+	_armor = war.armor();
+	_time_bleed = war.time_bleed();
+	_time_poison = war.time_poison();
+	_name = war.name();
 }
 
 //Супер атака босса монстра
@@ -134,6 +156,17 @@ Monster_better::Monster_better() {
 	_time_bleed = 0;
 	_time_poison = 0;
 	_name = "Toplyak";
+}
+
+Monster_better::Monster_better(Person& war) {
+	_hp = war.hp();
+	_max_hp = war.max_hp();
+	_dmg = war.dmg();
+	_mana = war.mana();
+	_armor = war.armor();
+	_time_bleed = war.time_bleed();
+	_time_poison = war.time_poison();
+	_name = war.name();
 }
 
 //функция суперудара

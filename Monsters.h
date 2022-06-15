@@ -10,6 +10,9 @@ public:
 	//Конструктор
 	Monster_base();
 
+	//конструктор копирования
+	Monster_base(Person& war);
+
 	//функция атаки монстра
 	void Monster_attack(Person& enemy);
 
@@ -29,6 +32,8 @@ public:
 	//Конструктор
 	Monster_boss();
 
+	Monster_boss(Person& war);
+
 	//функция супер атаки монстра босса
 	void Monster_boss_sup_attack(list<Person*>& enemies);
 
@@ -45,6 +50,8 @@ public:
 class Monster_better : public Monster_base {
 public:
 	Monster_better();
+
+	Monster_better(Person& war);
 
 	//функция супер атаки для монстра
 	void Monster_sup_attack(Person& enemy);

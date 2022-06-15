@@ -15,7 +15,7 @@ public:
 	Wizard();
 
 	//конструктор копирования
-	Wizard(const Wizard &wizrd);
+	Wizard(Person &wizrd);
 
 	//восстановление здоровья выбранному союзнику
 	void super_healing(Person* kent);
