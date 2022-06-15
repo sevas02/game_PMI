@@ -12,7 +12,7 @@ Monster_base::Monster_base() {
 	_hp = 100;
 	_max_hp = 100;
 	_dmg = 10;
-	_mana = 0;
+	_mana = 100;
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
