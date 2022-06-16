@@ -165,7 +165,7 @@ void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warri
 	check_person_time_poison(light_warriors);
 	check_person_time_bleed(light_warriors);
 }
-
+//проверка персонажей на здоровье
 void check_person_hp(list<Person*>& heroes) {
 	for (int i = 0; i < heroes.size(); i++) {
 		if (heroes.find_value(i)->hp() <= 0) {

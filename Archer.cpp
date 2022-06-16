@@ -3,7 +3,7 @@
 #define underline "\033[4m"
 #define no_underline "\033[0m"
 using namespace std;
-
+//Крнструктор
 Archer::Archer() {
 	_hp = 80;
 	_max_hp = 80;
@@ -14,7 +14,7 @@ Archer::Archer() {
 	_time_poison = 0;
 	_name = "Archer";
 }
-
+//Крнструктор копирования
 Archer::Archer(Person &arch) {
 	_hp = arch.hp();
 	_max_hp = arch.max_hp();
@@ -25,11 +25,11 @@ Archer::Archer(Person &arch) {
 	_time_poison = arch.time_poison();
 	_name = arch.name();
 }
-
+//Простая атака
 void Archer::simple_attack(Person* enemy) {
 	deal_dmg(enemy, _dmg);
 }
-
+//Супер атака
 void Archer::super_arrow_shot(Person* enemy) {
 
 	//урон от стрелы увеличивается
@@ -43,7 +43,7 @@ void Archer::super_arrow_shot(Person* enemy) {
 	enemy->app_time_bleed(2);
 	enemy->rec_bleed_dmg();
 }
-
+//Супер атака(град стрел)
 void Archer::hail_of_arrows(list<Person*>& enemies) {
 
 	//урон от стрел чуть уменьшается
@@ -65,7 +65,7 @@ void Archer::hail_of_arrows(list<Person*>& enemies) {
 	}
 	null_mana();
 }
-
+//Функция выбора атаки
 void Archer::choose_ability(list<Person*>& enemies) {
 	int idx;
 	cout << underline << "\nВы ходите за лучника " <<

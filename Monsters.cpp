@@ -18,7 +18,7 @@ Monster_base::Monster_base() {
 	_time_poison = 0;
 	_name = "Zombie";
 }
-
+//Конструктор копирования для базового монстра
 Monster_base::Monster_base(Person& war) {
 	_hp = war.hp();
 	_max_hp = war.max_hp();
@@ -30,7 +30,7 @@ Monster_base::Monster_base(Person& war) {
 	_name = war.name();
 }
 
-//функция атаки монстров
+//Функция атаки монстров
 void Monster_base::Monster_attack(Person& enemy) {
 	srand(time(0));
 	deal_dmg(&enemy, dmg());
@@ -44,7 +44,7 @@ void Monster_base::Monster_attack(Person& enemy) {
 	}
 }
 
-//функция выбора атаки для обычного монстра
+//Функция выбора атаки для обычного монстра
 void Monster_base::choose_ability(list<Person*>& enemies) {
 	int index;
 	cout << underline << "\nВы ходите за обычного монстра\n" << no_underline;
@@ -83,7 +83,7 @@ Monster_boss::Monster_boss() {
 	_time_poison = 0;
 	_name = "BOSS";
 }
-
+//Конструктор копирования для монстра босса
 Monster_boss::Monster_boss(Person& war) {
 	_hp = war.hp();
 	_max_hp = war.max_hp();
@@ -103,7 +103,7 @@ void Monster_boss::Monster_boss_sup_attack(list<Person*>& enemies) {
 	}
 	null_mana();
 }
-
+//Функция выбора атаки
 void Monster_boss::choose_ability(list<Person*>& enemies) {
 	int index;
 	bool flag = 0;
@@ -146,7 +146,7 @@ Monster_boss::~Monster_boss() {
 	_name = "";
 }
 
-//конструктор для монстра (чуть лучше базового)
+//Rонструктор для монстра (чуть лучше базового)
 Monster_better::Monster_better() {
 	_hp = 120;
 	_max_hp = 120;
@@ -157,7 +157,7 @@ Monster_better::Monster_better() {
 	_time_poison = 0;
 	_name = "Toplyak";
 }
-
+//Rонструктор для монстра(чуть лучше базового)
 Monster_better::Monster_better(Person& war) {
 	_hp = war.hp();
 	_max_hp = war.max_hp();
