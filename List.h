@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Person.h"
+#include <exception>
 using namespace std;
 
 template <class T>
@@ -158,10 +159,12 @@ bool list<T>::delete_element(int idx) {
 }
 
 //пЕЮКХГЮЖХЪ ОНХЯЙЮ Б ЯОХЯЙЕ
-//бмхлюмхе мер опнбепйх мю ньхайс еякх хмдейя анкэье пюглепю,
-//менаундхлн оепед опхлемемхел опнбепърэ
+//бмхлюмхе еякх хмдейя анкэье пюглепю,
+//йхдюеряъ хяйкчвемхе, мюдн кнбхрэ
 template <class T> 
 T list<T>::find_value(int idx) {
+	if (idx > _size)
+		throw 1;
 	node<T>* elem = _first;
 	while (idx > 0) {
 		elem = elem->_next;

@@ -66,7 +66,6 @@ void Warrior::Warrior_attack(Person* enemy) {
 		enemy->rec_bleed_dmg();
 		_mana += 5;
 	}
-	_mana += 10;
 }
 
 //Функция выбора атаки

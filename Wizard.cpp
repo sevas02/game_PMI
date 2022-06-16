@@ -80,7 +80,7 @@ void Wizard::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	}
 }
 
-//Диструктор
+//Деструктор
 Wizard::~Wizard() {
 	_hp = 0;
 	_max_hp = 0;

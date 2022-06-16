@@ -9,7 +9,7 @@ void Person::app_time_bleed(int app_time_bleed) {
 	SetColor(7, 0);
 	_time_bleed += app_time_bleed; 
 }
- //Функция яда
+ //Функция отравления
 void Person::app_time_poison(int app_time_poison) {
 	SetColor(10, 0);
 	cout << _name << " получил отравление на " << app_time_poison << " хода" << "\n";
