@@ -16,5 +16,6 @@ public:
 	void return_light_list2list(list<Person*>&);
 	void return_dark_list2list(list<Person*>&);
 	void copy_list2list(list<Person*>& light_wars, list<Person*>& dark_wars);
+	void return_list2list(list<Person*>& dark_wars, list<Person*>& light_wars);
 };
 #endif

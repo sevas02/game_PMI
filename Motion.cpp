@@ -101,3 +101,8 @@ void motion::return_dark_list2list(list<Person*>& dark_wars) {
 		}
 	}
 }
+
+void motion::return_list2list(list<Person*>& dark_wars, list<Person*>& light_wars) {
+	return_light_list2list(light_wars);
+	return_dark_list2list(dark_wars);
+}

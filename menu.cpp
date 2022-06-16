@@ -128,8 +128,7 @@ void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warrio
 		cout << "Хотите вернуть обратно?" << "\n";
 		cin >> ans;
 		if (ans == 1) {
-			step.return_dark_list2list(dark_warriors);
-			step.return_light_list2list(light_warriors);
+			step.return_list2list(dark_warriors, light_warriors);
 			i--;
 		}
 	}
@@ -159,8 +158,7 @@ void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warri
 		cout << "Хотите вернуть обратно?" << "\n";
 		cin >> ans;
 		if (ans == 1) {
-			step.return_light_list2list(light_warriors);
-			step.return_dark_list2list(dark_warriors);
+			step.return_list2list(dark_warriors, light_warriors);
 			i--;
 		}
 	}
