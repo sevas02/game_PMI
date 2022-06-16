@@ -58,7 +58,7 @@ list<T>::~list() {
 	_first = 0;
 }
 
-//РњРµС‚РѕРґ СЃРѕР·РґР°РЅРёСЏ СѓР·Р»Р°
+//Метод создания узла
 template <class T> 
 node<T>* list<T>::create_node(T info) {
 	node<T>* el = new node<T>{info};
@@ -68,7 +68,7 @@ node<T>* list<T>::create_node(T info) {
 	return el;
 }
 
-//РњРµС‚РѕРґ РґРѕР±Р°РІР»РµРЅРёСЏ СѓР·Р»Р° РІ РЅР°С‡Р°Р»Рѕ СЃРїРёСЃРєР°
+//Метод добавления узла в начало списка
 template <class T> 
 void list<T>::push_front(T value) {
 	node<T>* new_el = create_node(value);
@@ -90,7 +90,7 @@ void list<T>::push_front(T value) {
 	_size++;
 }
 
-//РњРµС‚РѕРґ РґРѕР±Р°РІР»РµРЅРёСЏ СѓР·Р»Р° РІ РєРѕРЅРµС† СЃРїРёСЃРєР°
+//Метод добавления узла в конец списка
 template <class T> 
 void list<T>::push_back(T value) {
 	node<T>* new_el = create_node(value);
@@ -112,7 +112,7 @@ void list<T>::push_back(T value) {
 	_size++;
 }
 
-//РњРµС‚РѕРґ СѓРґР°Р»РµРЅРёСЏ СѓР·Р»Р° СЃ РєРѕРЅС†Р° СЃРїРёСЃРєР°
+//Метод удаления узла с конца списка
 template <class T> 
 bool list<T>::delete_last() {
 	if (_size == 0)
@@ -124,7 +124,7 @@ bool list<T>::delete_last() {
 	return 1;
 }
 
-//РњРµС‚РѕРґ СѓРґР°Р»РµРЅРёСЏ СѓР·Р»Р° СЃРЅР°С‡Р°Р»Р°
+//Метод удаления узла сначала
 template <class T> 
 bool list<T>::delete_front() {
 	if (_size == 0)
@@ -136,7 +136,7 @@ bool list<T>::delete_front() {
 	return 1;
 }
 
-//РњРµС‚РѕРґ СѓРґР°Р»РµРЅРёСЏ СѓР·Р»Р° 
+//Метод удаления узла 
 template <class T> 
 bool list<T>::delete_element(int idx) {
 	if (idx > _size)
@@ -158,9 +158,9 @@ bool list<T>::delete_element(int idx) {
 	return 1;
 }
 
-//Р РµР°Р»РёР·Р°С†РёСЏ РїРѕРёСЃРєР° РІ СЃРїРёСЃРєРµ
-//Р’РќРРњРђРќРР• Р•РЎР›Р РРќР”Р•РљРЎ Р‘РћР›Р¬РЁР• Р РђР—РњР•Р Рђ,
-//РљРР”РђР•РўРЎРЇ РРЎРљР›Р®Р§Р•РќРР•, РќРђР”Рћ Р›РћР’РРўР¬
+//Реализация поиска в списке
+//ВНИМАНИЕ ЕСЛИ ИНДЕКС БОЛЬШЕ РАЗМЕРА,
+//КИДАЕТСЯ ИСКЛЮЧЕНИЕ, НАДО ЛОВИТЬ
 template <class T> 
 T list<T>::find_value(int idx) {
 	if (idx > _size)

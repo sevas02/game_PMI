@@ -12,7 +12,7 @@ Monster_base::Monster_base() {
 	_hp = 100;
 	_max_hp = 100;
 	_dmg = 10;
-	_mana = 100;
+	_mana = 0;
 	_armor = 0;
 	_time_bleed = 0;
 	_time_poison = 0;
@@ -181,6 +181,7 @@ void Monster_better::Monster_sup_attack(Person& enemy) {
 	//5 - число ходов
 	enemy.app_time_poison(5);
 	enemy.rec_poison_dmg();
+	null_mana();
 }
 
 //Функция выбора способности для базового монстра
