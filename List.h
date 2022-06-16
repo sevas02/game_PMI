@@ -36,11 +36,10 @@ public:
 	node<T>* create_node(T info);
 	void push_front(T value);
 	void push_back(T value);
-	void delete_element(int);
-	void delete_last();
-	void delete_front();
+	bool delete_element(int);
+	bool delete_last();
+	bool delete_front();
 	T find_value(int idx);
-	void print();
 };
 
 template <class T> 
@@ -58,6 +57,7 @@ list<T>::~list() {
 	_first = 0;
 }
 
+//метод создания узла
 template <class T> 
 node<T>* list<T>::create_node(T info) {
 	node<T>* el = new node<T>{info};
@@ -67,6 +67,7 @@ node<T>* list<T>::create_node(T info) {
 	return el;
 }
 
+//метод добавления узла в начало списка
 template <class T> 
 void list<T>::push_front(T value) {
 	node<T>* new_el = create_node(value);
@@ -88,6 +89,7 @@ void list<T>::push_front(T value) {
 	_size++;
 }
 
+//метод добавления узла в конец списка
 template <class T> 
 void list<T>::push_back(T value) {
 	node<T>* new_el = create_node(value);
@@ -109,24 +111,35 @@ void list<T>::push_back(T value) {
 	_size++;
 }
 
+//метод удаления узла с конца списка
 template <class T> 
-void list<T>::delete_last() {
+bool list<T>::delete_last() {
+	if (_size == 0)
+		return 0;
 	node<T>* new_elem = _last;
 	_last = _last->_prev;
 	delete new_elem;
 	_size--;
+	return 1;
 }
 
+//метод удаления узла сначала
 template <class T> 
-void list<T>::delete_front() {
+bool list<T>::delete_front() {
+	if (_size == 0)
+		return 0;
 	node<T>* new_elem = _first;
 	_first = _first->_next;
 	delete new_elem;
 	_size--; 
+	return 1;
 }
 
+//метод удаления узла 
 template <class T> 
-void list<T>::delete_element(int idx) {
+bool list<T>::delete_element(int idx) {
+	if (idx > _size)
+		return 0;
 	node<T>* elem = _first;
 	while (idx > 0) {
 		elem = elem->_next;
@@ -141,8 +154,12 @@ void list<T>::delete_element(int idx) {
 		elem->_prev->_next = elem->_next;
 	delete elem;
 	_size--;
+	return 1;
 }
 
+//реализация поиска в списке
+//ВНИМАНИЕ НЕТ ПРОВЕРКИ НА ОШИБКУ ЕСЛИ ИНДЕКС БОЛЬШЕ РАЗМЕРА,
+//НЕОБХОДИМО ПЕРЕД ПРИМЕНЕНИЕМ ПРОВЕРЯТЬ
 template <class T> 
 T list<T>::find_value(int idx) {
 	node<T>* elem = _first;
@@ -153,15 +170,5 @@ T list<T>::find_value(int idx) {
 	return elem->_value;
 }
 
-template <class T> 
-void list<T>::print() {
-	node<T>* elem = _first;
-	int idx = 1;
-	while (elem != 0) {
-		cout << idx << "." << elem->_value << endl;
-		idx++;
-		elem = elem->_next;
-	}
-}
 
 #endif

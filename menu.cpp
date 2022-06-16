@@ -126,7 +126,9 @@ void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warrio
 		draw_side(light_warriors, 1, light_warriors.size());
 		draw_side(dark_warriors, 5, dark_warriors.size());
 		cout << "Хотите вернуть обратно?" << "\n";
-		cin >> ans;
+		cout << "1 - Да, 0 - Нет" << "\n";
+		//2 - максимальное число для выбора
+		ans = check_idx(2);
 		if (ans == 1) {
 			step.return_list2list(dark_warriors, light_warriors);
 			i--;
@@ -156,7 +158,9 @@ void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warri
 		draw_side(light_warriors, 1, light_warriors.size());
 		draw_side(dark_warriors, 5, dark_warriors.size());
 		cout << "Хотите вернуть обратно?" << "\n";
-		cin >> ans;
+		cout << "1 - Да, 2 - Нет" << "\n";
+		//2 - максимальное число для выбора
+		ans = check_idx(2);
 		if (ans == 1) {
 			step.return_list2list(dark_warriors, light_warriors);
 			i--;

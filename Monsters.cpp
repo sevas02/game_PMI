@@ -49,6 +49,7 @@ void Monster_base::choose_ability(list<Person*>& enemies) {
 	int index;
 	cout << underline << "\nВы ходите за обычного монстра\n" << no_underline;
 	cout << "Выберите действие:\n1.обычная атака\n";
+	//1 - макс число для выбора
 	index = check_idx(1);
 	if (index == 1) {
 		cout << underline << "\nВыберите противника " << no_underline << "\n";
@@ -112,6 +113,7 @@ void Monster_boss::choose_ability(list<Person*>& enemies) {
 	" ед. маны |\n" << no_underline;
 	cout << "Выберите действие:\n1.обычная атака\n2.супер-атака\n";
 	while (flag != 1) {
+		//2 - максимальное число для выбора
 		index = check_idx(2);
 		switch (index) {
 		case 1:
@@ -123,6 +125,7 @@ void Monster_boss::choose_ability(list<Person*>& enemies) {
 			flag = 1;
 			break;
 		case 2:
+			//10 - значение необходимое для использования способности
 			if (mana() <= 10) {
 				cout << "Недостаточно маны! Повторите ввод!\n";
 				break;
@@ -198,6 +201,7 @@ void Monster_better::choose_ability(list<Person*>& enemies) {
 			flag = 1;
 			break;
 		case 2:
+			//10 - значение маны необходимое для использования способности
 			if (mana() <= 10) {
 				cout << "Недостаточно маны! Повторите ввод!\n";
 				break;

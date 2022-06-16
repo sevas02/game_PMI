@@ -11,14 +11,19 @@
 #include "text_color.h"
 using namespace std;
 
+//функция вывода персонажей из листа
 void print(list<Person*>& lst);
 
+//функция выбора персонажа темной стороны
 void choose_light_person(list<Person*>& light_warriors, int num);
 
+//функция выбора персонажа светлой стороны
 void choose_dark_person(list<Person*>& dark_warriors, int num);
 
+//функция которая определяет персонажа темных сил 
 int get_idx_dark(Person* hero);
 
+//функция которая определяет персонажа светлых сил 
 int get_idx_light(Person* hero);
 
 //ход тёмного персонажа
