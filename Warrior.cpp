@@ -4,7 +4,7 @@
 #define underline "\033[4m"
 #define no_underline "\033[0m"
 using namespace std;
-
+//Конструктор
 Warrior::Warrior() {
 	_hp = 100;
 	_max_hp = 100;
@@ -16,7 +16,7 @@ Warrior::Warrior() {
 	_name = "Warrior";
 }
 
-
+//Конструктор копирования
 Warrior::Warrior(Person& war) {
 	_hp = war.hp();
 	_max_hp = war.max_hp();
@@ -27,7 +27,7 @@ Warrior::Warrior(Person& war) {
 	_time_poison = war.time_poison();
 	_name = war.name();
 }
-
+//Диструктор
 Warrior::~Warrior() {
 	_hp = 0;
 	_max_hp = 0;
@@ -38,18 +38,18 @@ Warrior::~Warrior() {
 	_time_poison = 0;
 	_name = "";
 }
-
+//Дать броню союзнику
 void Warrior::give_shield(Person* kent) {
 	kent->Set_armor(true);
 	null_mana();
 }
-
+//Супер атака война
 void Warrior::Warrior_super_attack() {
 		_hp += 30;
 		_dmg += 5;
 		null_mana();
 }
-
+//Обычная атака война
 void Warrior::Warrior_attack(Person* enemy) {
 	srand(time(0));
 	deal_dmg(enemy, _dmg);
@@ -62,7 +62,7 @@ void Warrior::Warrior_attack(Person* enemy) {
 	}
 	_mana += 10;
 }
-
+//Функция выбора атаки
 void Warrior::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	int idx;
 	cout << underline << "\nВы ходите за воина " <<
