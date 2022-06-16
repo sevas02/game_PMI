@@ -138,10 +138,12 @@ void dark_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warrio
 }
 
 void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warriors) {
-	int idx = 0;
+	int idx = 0, ans = 0;
+	motion step;
 	for (int i = 0; i < light_warriors.size(); i++) {
 		if (dark_warriors.size() == 0)
 			break;
+		step.copy_list2list(light_warriors, dark_warriors);
 		print(dark_warriors);
 		idx = get_idx_light(light_warriors.find_value(i));
 		if (idx == 1)
@@ -154,6 +156,13 @@ void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warri
 		glClear(GL_COLOR_BUFFER_BIT);
 		draw_side(light_warriors, 1, light_warriors.size());
 		draw_side(dark_warriors, 5, dark_warriors.size());
+		cout << "Хотите вернуть обратно?" << "\n";
+		cin >> ans;
+		if (ans == 1) {
+			step.return_light_list2list(light_warriors);
+			step.return_dark_list2list(dark_warriors);
+			i--;
+		}
 	}
 	check_person_time_poison(light_warriors);
 	check_person_time_bleed(light_warriors);
