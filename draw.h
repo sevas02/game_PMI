@@ -2,6 +2,7 @@
 #define DRAW_H
 #include<GL/glut.h>
 #include"Person.h"
+#include "text_color.h"
 
 void display();
 

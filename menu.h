@@ -8,6 +8,7 @@
 #include "Monsters.h"
 #include "Warrior.h"
 #include "List.h"
+#include "text_color.h"
 using namespace std;
 
 void print(list<Person*>& lst);

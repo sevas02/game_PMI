@@ -1,12 +1,6 @@
 #include "Checkers.h"
-#include <iostream>
-#include <Windows.h>
+#include "text_color.h"
 using namespace std;
-
-void SetColor(int text, int background) {
-	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hStdOut, (WORD)((background << 4) | text));
-}
 
 int heroes_num(){
 	int heroes_num;
@@ -32,4 +26,5 @@ int check_idx(int max_num) {
 	}
 	return idx;
 }
+
 

@@ -187,7 +187,7 @@ void check_person_time_bleed(list<Person*>& heroes) {
 			heroes.find_value(i)->rec_bleed_dmg();
 			//светлокрасный цвет
 			SetColor(4, 0);
-			cout<< heroes.find_value(i)->name() << " теряет 5 hp от кровотечения" << "\n";
+			cout << heroes.find_value(i)->name() << " теряет 5 hp от кровотечения" << "\n";
 			SetColor(7, 0);
 		}
 }
@@ -203,3 +203,4 @@ void check_person_time_poison(list<Person*>& heroes) {
 			SetColor(7, 0);
 		}
 }
+

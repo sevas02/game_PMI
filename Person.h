@@ -6,6 +6,7 @@
 #include <vector>
 #include "List.h"
 #include "Checkers.h"
+#include "text_color.h"
 using namespace std;
 
 class Person {
