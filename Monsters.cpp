@@ -72,7 +72,6 @@ Monster_base::~Monster_base() {
 	_name = "";
 }
 
-
 //Конструктор для монстра босса
 Monster_boss::Monster_boss() {
 	_hp = 200;
@@ -84,6 +83,7 @@ Monster_boss::Monster_boss() {
 	_time_poison = 0;
 	_name = "BOSS";
 }
+
 //Конструктор копирования для монстра босса
 Monster_boss::Monster_boss(Person& war) {
 	_hp = war.hp();
@@ -104,6 +104,7 @@ void Monster_boss::Monster_boss_sup_attack(list<Person*>& enemies) {
 	}
 	null_mana();
 }
+
 //Функция выбора атаки
 void Monster_boss::choose_ability(list<Person*>& enemies) {
 	int index;
@@ -149,7 +150,7 @@ Monster_boss::~Monster_boss() {
 	_name = "";
 }
 
-//Rонструктор для монстра (чуть лучше базового)
+//Конструктор для монстра (чуть лучше базового)
 Monster_better::Monster_better() {
 	_hp = 120;
 	_max_hp = 120;
@@ -160,7 +161,8 @@ Monster_better::Monster_better() {
 	_time_poison = 0;
 	_name = "Toplyak";
 }
-//Rонструктор для монстра(чуть лучше базового)
+
+//Конструктор для монстра(чуть лучше базового)
 Monster_better::Monster_better(Person& war) {
 	_hp = war.hp();
 	_max_hp = war.max_hp();
@@ -172,16 +174,16 @@ Monster_better::Monster_better(Person& war) {
 	_name = war.name();
 }
 
-//функция суперудара
+//Функция суперудара
 void Monster_better::Monster_sup_attack(Person& enemy) {
-	//нанесенный урон уменьшается в два раза
+	//Нанесенный урон уменьшается в два раза
 	deal_dmg(&enemy, dmg() / 2);
 	//5 - число ходов
 	enemy.app_time_poison(5);
 	enemy.rec_poison_dmg();
 }
 
-//функция выбора способности для базового монстра
+//Функция выбора способности для базового монстра
 void Monster_better::choose_ability(list<Person*>& enemies) {
 	int index;
 	bool flag = 0;
@@ -217,7 +219,7 @@ void Monster_better::choose_ability(list<Person*>& enemies) {
 	}
 }
 
-//деструктор для монстра (чуть лучше базового)
+//Деструктор для монстра (чуть лучше базового)
 Monster_better::~Monster_better() {
 	_hp = 0;
 	_max_hp = 0;

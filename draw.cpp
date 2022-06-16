@@ -13,38 +13,38 @@ using namespace std;
 #define no_underline "\033[0m"
 GLint Width = 600, Height = 600;
 
-const int R = 30; // радиус окружности и круга
+const int R = 30; //Радиус окружности и круга
 const int N = 600;
 
 
-
+//Приветствующая заставка
 void hello() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
 
 	glColor3f(0.0, 0.0, 0.0);
-	glRasterPos2i(2 * Width / 6 + 25, 3 * Height / 4); //позиция текста
+	glRasterPos2i(2 * Width / 6 + 25, 3 * Height / 4); //Позиция текста
 	string s = "GAME OF THE YEAR";
 	for (int i = 0; i < s.size(); i++)
 		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
 
-	glRasterPos2i(2 * Width / 6 + 25, 3 * Height / 4); //позиция текста
+	glRasterPos2i(2 * Width / 6 + 25, 3 * Height / 4); //Позиция текста
 	s = "____ __ ___ ____";
 	for (int i = 0; i < s.size(); i++)
 		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
 
-	glRasterPos2i(Width / 6, 2 * Height / 4); //позиция текста
+	glRasterPos2i(Width / 6, 2 * Height / 4); //Позиция текста
 	s = "~Nikita~ ~Motya~";
 	for (int i = 0; i < s.size(); i++)
 		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
 
 
-	glRasterPos2i(3.5 * Width / 6, 2 * Height / 4); //позиция текста
+	glRasterPos2i(3.5 * Width / 6, 2 * Height / 4); //Позиция текста
 	s = "~Sevas~ ~Lubas~";
 	for (int i = 0; i < s.size(); i++)
 		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
 
-	glRasterPos2i(3 * Width / 6 - 25, Height / 4); //позиция текста
+	glRasterPos2i(3 * Width / 6 - 25, Height / 4); //Позиция текста
 	s = "START";
 	for (int i = 0; i < s.size(); i++)
 		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, s[i]);
@@ -52,7 +52,7 @@ void hello() {
 	glBegin(GL_TRIANGLE_FAN);
 	glColor3f(1.0, 1.0, 1.0);
 
-	int R = 20; // радиус окружности и круга
+	int R = 20; //Радиус окружности и круга
 	int N = 600;
 	for (int j = 1; j <= N; j++) {
 		glVertex2f(Width / 2 + R * cos(2 * 3.14 / N * j), Height / 3 + 30 + R * sin(2 * 3.14 / N * j));
@@ -78,7 +78,7 @@ void hello() {
 	glFlush();
 }
 
-//функция перерисовки hp 
+//Функция перерисовки hp 
 void changes_hp(Person& pers, int side, int del, int j) {
 	double proc = pers.hp();
 	proc /= pers.max_hp();
@@ -91,7 +91,7 @@ void changes_hp(Person& pers, int side, int del, int j) {
 	glEnd();
 }
 
-//прорисовка стороны
+//Прорисовка стороны
 void draw_side(list<Person*>& persons, int side, int num_heroes) {
 	int del = num_heroes * 2; //сколько делений квадрата у нас для определенного кол-ва героев
 

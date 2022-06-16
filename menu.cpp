@@ -169,11 +169,11 @@ void light_persons_step(list<Person*>& dark_warriors, list<Person*>& light_warri
 	check_person_time_poison(light_warriors);
 	check_person_time_bleed(light_warriors);
 }
-//проверка персонажей на здоровье
+//Проверка персонажей на здоровье
 void check_person_hp(list<Person*>& heroes) {
 	for (int i = 0; i < heroes.size(); i++) {
 		if (heroes.find_value(i)->hp() <= 0) {
-			//светлокрасный цвет
+			//Светлокрасный цвет
 			SetColor(12, 0);
 			cout << heroes.find_value(i)->name() << " мёртв" << "\n";
 			SetColor(7, 0);
@@ -182,24 +182,24 @@ void check_person_hp(list<Person*>& heroes) {
 	}
 }
 
-//проверка персонажей на кровотечение
+//Проверка персонажей на кровотечение
 void check_person_time_bleed(list<Person*>& heroes) {
 	for (int i = 0; i < heroes.size(); i++)
 		if (heroes.find_value(i)->time_bleed() > 0) {
 			heroes.find_value(i)->rec_bleed_dmg();
-			//светлокрасный цвет
+			//Светлокрасный цвет
 			SetColor(4, 0);
 			cout << heroes.find_value(i)->name() << " теряет 5 hp от кровотечения" << "\n";
 			SetColor(7, 0);
 		}
 }
 
-//проверка персонажей на отравление
+//Проверка персонажей на отравление
 void check_person_time_poison(list<Person*>& heroes) {
 	for (int i = 0; i < heroes.size(); i++)
 		if (heroes.find_value(i)->time_poison() > 0) {
 			heroes.find_value(i)->rec_bleed_dmg();
-			//светлозеленый цвет
+			//Светлозеленый цвет
 			SetColor(10, 0);
 			cout << heroes.find_value(i)->name() << " теряет 5 hp от отравления" << "\n";
 			SetColor(7, 0);

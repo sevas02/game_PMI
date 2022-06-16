@@ -11,31 +11,32 @@ class Stack {
 private:
 	T* arr;
 	const unsigned int size;
-	int top; //индекс верхнего элемента
+	int top; //Индекс верхнего элемента
 public:
-	//конструктор стека
+	//Конструктор стека
 	Stack(const unsigned int maxSize) :
 		size(maxSize), top(0), arr(new T[maxSize]) {}
 
-	//деструктор стека
+	//Деструктор стека
 	~Stack() { delete[] arr; }
 
-	//функция добавления элемента
+	//Функция добавления элемента
 	void push(const T);
 
-	//функция удаления элемента
+	//Функция удаления элемента
 	T pop();
 
-	//посмотреть верхний элемент
+	//Посмотреть верхний элемент
 	T GetTop() const;
 
-	//узнать размер
+	//Узнать размер
 	unsigned int sizeStack() const;
 
-	//напечатать стэк
+	//Напечатать стэк
 	void printStack();
 };
 
+//Функция добавления элемента
 template <class T>
 void Stack<T>::push(const T newElement) {
 	if (top >= size)
@@ -44,6 +45,7 @@ void Stack<T>::push(const T newElement) {
 	top++;
 }
 
+//Функция удаления элемента
 template <class T>
 T Stack<T>::pop() {
 	if (top <= 0)
@@ -54,6 +56,7 @@ T Stack<T>::pop() {
 
 }
 
+//Посмотреть верхний элемент
 template <class T>
 T Stack<T>::GetTop() const {
 	if (top <= 0)
@@ -61,12 +64,13 @@ T Stack<T>::GetTop() const {
 	return arr[top - 1];
 }
 
-
+//Узнать размер
 template <class T>
 unsigned int  Stack<T>::sizeStack() const {
 	return top;
 }
 
+//Напечатать стэк
 template <class T>
 void Stack<T>::printStack() {
 	for (int idx = top - 1; idx >= 0; idx--)

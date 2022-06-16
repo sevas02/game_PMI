@@ -10,13 +10,13 @@ public:
 	//Конструктор
 	Monster_base();
 
-	//конструктор копирования
+	//Конструктор копирования
 	Monster_base(Person& war);
 
-	//функция атаки монстра
+	//Функция атаки монстра
 	void Monster_attack(Person& enemy);
 
-	//функция выбора атаки
+	//Функция выбора атаки
 	virtual void choose_ability(list<Person*>& enemies);
 
 	//Деструктор
@@ -32,12 +32,13 @@ public:
 	//Конструктор
 	Monster_boss();
 
+	//Конструктор копирования
 	Monster_boss(Person& war);
 
-	//функция супер атаки монстра босса
+	//Функция супер атаки монстра босса
 	void Monster_boss_sup_attack(list<Person*>& enemies);
 
-	//функция выбора атаки
+	//Функция выбора атаки
 	void choose_ability(list<Person*>& enemy);
 
 	//Деструктор
@@ -49,16 +50,19 @@ public:
 //Супер удар - гаранитрованное отравление героя и нанесение ему урона 
 class Monster_better : public Monster_base {
 public:
+	//Конструктор
 	Monster_better();
 
+	//Конструктор копирования
 	Monster_better(Person& war);
 
-	//функция супер атаки для монстра
+	//Функция супер атаки для монстра
 	void Monster_sup_attack(Person& enemy);
 
-	//функция выбора атаки
+	//Функция выбора атаки
 	void choose_ability(list<Person*>& enemies);
 
+	//Деструктор
 	~Monster_better();
 };
 

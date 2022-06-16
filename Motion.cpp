@@ -3,6 +3,8 @@
 #include "menu.h"
 using namespace std;
 
+//ÔÓÍÊÖÈÈ ÊÎÏÈĞÂÀÍÈß ÏÅĞÑÎÍÀÆÅÉ (ÄËß ÄÀËÜÍÅÉØÅÃÎ ÎÒÊÀÒÀ)
+
 void motion::copy_light_list2list(list<Person*>& light_wars) {
 	Wizard* mag = 0;
 	Warrior* war = 0;
@@ -55,6 +57,8 @@ void motion::copy_list2list(list<Person*>& light_wars, list<Person*>& dark_wars)
 	copy_dark_list2list(dark_wars);
 	copy_light_list2list(light_wars);
 }
+
+//ÔÓÍÊÖÈÈ ÂÎÇÂĞÀÒÀ ÑÎÕĞÀÍÅÍÍÛÕ ÇÀ×ÅÍÈÉ ÏÅĞÑÎÍÀÆÅÉ (ÄËß ÎÒÊÀÒÀ)
 
 void motion::return_light_list2list(list<Person*>& light_wars) {
 	int limit = light_wars.size();

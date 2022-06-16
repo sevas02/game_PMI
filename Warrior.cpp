@@ -58,10 +58,11 @@ void Warrior::Warrior_super_attack() {
 void Warrior::Warrior_attack(Person* enemy) {
 	srand(time(0));
 	deal_dmg(enemy, _dmg);
+	//Рандомим число
 	int temp = 1 + rand() % 10;
-	// шанс нанести урон с кровотечением - 30%
+	//Шанс нанести урон с кровотечением - 30%
 	if (temp <= 3) {
-		enemy->app_time_poison(2);
+		enemy->app_time_bleed(2);
 		enemy->rec_bleed_dmg();
 		_mana += 5;
 	}

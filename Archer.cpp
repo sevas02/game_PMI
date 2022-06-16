@@ -3,7 +3,8 @@
 #define underline "\033[4m"
 #define no_underline "\033[0m"
 using namespace std;
-//Крнструктор
+
+//Конструктор
 Archer::Archer() {
 	_hp = 80;
 	_max_hp = 80;
@@ -14,7 +15,8 @@ Archer::Archer() {
 	_time_poison = 0;
 	_name = "Archer";
 }
-//Крнструктор копирования
+
+//Конструктор копирования
 Archer::Archer(Person &arch) {
 	_hp = arch.hp();
 	_max_hp = arch.max_hp();
@@ -25,24 +27,27 @@ Archer::Archer(Person &arch) {
 	_time_poison = arch.time_poison();
 	_name = arch.name();
 }
+
 //Простая атака
 void Archer::simple_attack(Person* enemy) {
 	deal_dmg(enemy, _dmg);
 }
+
 //Супер атака
 void Archer::super_arrow_shot(Person* enemy) {
 
-	//урон от стрелы увеличивается
+	//Урон от стрелы увеличивается
 	int temp_dmg = _dmg * 1.75;
 
 	deal_dmg(enemy, temp_dmg);
 
 	null_mana();
 
-	//супервысрел дает последствия (кровотечение противника)
+	//Супервысрел дает последствия (кровотечение противника)
 	enemy->app_time_bleed(2);
 	enemy->rec_bleed_dmg();
 }
+
 //Супер атака(град стрел)
 void Archer::hail_of_arrows(list<Person*>& enemies) {
 
@@ -65,6 +70,7 @@ void Archer::hail_of_arrows(list<Person*>& enemies) {
 	}
 	null_mana();
 }
+
 //Функция выбора атаки
 void Archer::choose_ability(list<Person*>& enemies) {
 	int idx;
@@ -101,6 +107,7 @@ void Archer::choose_ability(list<Person*>& enemies) {
 	}
 }
 
+//Деструктор
 Archer::~Archer() {
 	_hp = 0;
 	_max_hp = 0;

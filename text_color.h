@@ -4,7 +4,7 @@
 #include <Windows.h>
 using namespace std;
 
-//функция для выделения текста цветом
+//Функция для выделения текста цветом
 void SetColor(int text, int background);
 
 #endif //TEXT_COLOR_H

@@ -57,7 +57,7 @@ list<T>::~list() {
 	_first = 0;
 }
 
-//метод создания узла
+//Метод создания узла
 template <class T> 
 node<T>* list<T>::create_node(T info) {
 	node<T>* el = new node<T>{info};
@@ -67,7 +67,7 @@ node<T>* list<T>::create_node(T info) {
 	return el;
 }
 
-//метод добавления узла в начало списка
+//Метод добавления узла в начало списка
 template <class T> 
 void list<T>::push_front(T value) {
 	node<T>* new_el = create_node(value);
@@ -89,7 +89,7 @@ void list<T>::push_front(T value) {
 	_size++;
 }
 
-//метод добавления узла в конец списка
+//Метод добавления узла в конец списка
 template <class T> 
 void list<T>::push_back(T value) {
 	node<T>* new_el = create_node(value);
@@ -111,7 +111,7 @@ void list<T>::push_back(T value) {
 	_size++;
 }
 
-//метод удаления узла с конца списка
+//Метод удаления узла с конца списка
 template <class T> 
 bool list<T>::delete_last() {
 	if (_size == 0)
@@ -123,7 +123,7 @@ bool list<T>::delete_last() {
 	return 1;
 }
 
-//метод удаления узла сначала
+//Метод удаления узла сначала
 template <class T> 
 bool list<T>::delete_front() {
 	if (_size == 0)
@@ -135,7 +135,7 @@ bool list<T>::delete_front() {
 	return 1;
 }
 
-//метод удаления узла 
+//Метод удаления узла 
 template <class T> 
 bool list<T>::delete_element(int idx) {
 	if (idx > _size)
@@ -157,7 +157,7 @@ bool list<T>::delete_element(int idx) {
 	return 1;
 }
 
-//реализация поиска в списке
+//Реализация поиска в списке
 //ВНИМАНИЕ НЕТ ПРОВЕРКИ НА ОШИБКУ ЕСЛИ ИНДЕКС БОЛЬШЕ РАЗМЕРА,
 //НЕОБХОДИМО ПЕРЕД ПРИМЕНЕНИЕМ ПРОВЕРЯТЬ
 template <class T> 
@@ -169,6 +169,4 @@ T list<T>::find_value(int idx) {
 	}
 	return elem->_value;
 }
-
-
 #endif

@@ -42,31 +42,31 @@ public:
 	void app_time_bleed(int app_time_bleed);
 	void app_time_poison(int app_time_poison);
 
-	//пополнение маны
+	//Пополнение маны
 	void rise_mana(Person* enemy);
 
-	//нанесение урона
+	//Нанесение урона
 	void deal_dmg(Person* enemy, int dmg);
 
-	//получение урона (recieve)
+	//Получение урона (recieve)
 	void rec_dmg(Person enemy) { _hp -= ((_armor == true) ? _armor = false : _dmg); }
 
-	//получение хп (recieve)
+	//Получение хп (recieve)
 	void rec_hp(int val) { _hp += val; }
 
-	//обнуление маны
+	//Обнуление маны
 	void null_mana() { _mana = 0; }
 
-	//получение брони
+	//Получение брони
 	void recieve_armor() { _armor = true; }
 
-	//получение урона от отравления
+	//Получение урона от отравления
 	void rec_poison_dmg();
 
-	//получение урона от кровотечения
+	//Получение урона от кровотечения
 	void rec_bleed_dmg();
 
-	//функция определения атаки у юнита
+	//Функция определения атаки у юнита
 	virtual void choose_ability() { ; }
 
 	friend ostream& operator<<(ostream& output, const Person& stud);

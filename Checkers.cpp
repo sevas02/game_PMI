@@ -1,6 +1,7 @@
 #include "Checkers.h"
 #include "text_color.h"
 using namespace std;
+
 //Функция проверки корректного ввода номера героя
 int heroes_num(){
 	int heroes_num;
@@ -14,6 +15,7 @@ int heroes_num(){
 	}
 	return heroes_num;
 }
+
 //Функция проверки корректного ввода индекса
 int check_idx(int max_num) {
 	int idx;

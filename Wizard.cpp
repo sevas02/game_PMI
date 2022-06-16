@@ -4,6 +4,7 @@
 #define underline "\033[4m"
 #define no_underline "\033[0m"
 using namespace std;
+
 //Конструктор
 Wizard::Wizard() {
 	_hp = 60;
@@ -15,6 +16,7 @@ Wizard::Wizard() {
 	_time_poison = 0;
 	_name = "Wizard";
 }
+
 //Конструктор копирования 
 Wizard::Wizard(Person& wizrd) {
 	_hp = wizrd.hp();
@@ -26,6 +28,7 @@ Wizard::Wizard(Person& wizrd) {
 	_time_poison = wizrd.time_poison();
 	_name = wizrd.name();
 }
+
 //Захилить союзника
 void Wizard::super_healing(Person* kent) {
 	int val = kent->max_hp() * val_heal;
@@ -34,6 +37,7 @@ void Wizard::super_healing(Person* kent) {
 		kent->Set_hp(kent->max_hp());
 	null_mana();
 }
+
 //Супер атака
 void Wizard::super_fire_punch(list<Person*>& enemies) {
 	srand(time(0));
@@ -46,6 +50,7 @@ void Wizard::super_fire_punch(list<Person*>& enemies) {
 	if (num <= 2) 
 		deal_dmg(enemies.find_value(idx), temp_dmg);
 }
+
 //Функция выбора атаки
 void Wizard::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 	int idx;
@@ -74,6 +79,7 @@ void Wizard::choose_ability(list<Person*>& enemies, list<Person*>& kents) {
 		super_healing(kent);
 	}
 }
+
 //Диструктор
 Wizard::~Wizard() {
 	_hp = 0;
