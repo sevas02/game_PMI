@@ -1,7 +1,6 @@
 #include "menu.h"
 #include "Checkers.h"
 #include "Motion.h"
-#include "Stack.h"
 #include "draw.h"
 #include <iostream>
 #define underline "\033[4m"
