@@ -10,13 +10,13 @@ void myinit();
 
 void SpecKeyboard(int key, int x, int y);
 
-//Приветствующая заставка
+//РџСЂРёРІРµС‚СЃС‚РІСѓСЋС‰Р°СЏ Р·Р°СЃС‚Р°РІРєР°
 void hello();
 
-//Прорисовка стороны
+//РџСЂРѕСЂРёСЃРѕРІРєР° СЃС‚РѕСЂРѕРЅС‹
 void draw_side(list<Person*>& persons, int side, int num_heroes);
 
-//Функция перерисовки hp 
+//Р¤СѓРЅРєС†РёСЏ РїРµСЂРµСЂРёСЃРѕРІРєРё hp 
 void changes_hp(Person& pers, int side, int del, int j);
 
 #endif DRAW_H
